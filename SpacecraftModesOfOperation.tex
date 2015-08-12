@@ -14,7 +14,15 @@ The spacecraft will experience the following modes during its lifetime. A differ
             Has uncontrolled attitude. 
              \\\hline
             Recovery/De-tumble mode & (NOTE: this is example text) This mode is used to de-tumble the spacecraft after ejection from the deployment dispenser as well as to recover it from any spin-ups. In addition to the essential components that are ON all the time, the ADCS is also operational during this mode. Any other device could be turned ON by ground command.  \\\hline
-            Payload Operation mode &   \\\hline
+            Payload Operation Mode & This mode is used only when taking a picture.  The camera module is booted up, the camera takes a picture, stores it is RAM/ROM and then the camera is powered town again to conserve power.  This mode can be triggered by reaching a preset GPS location or manually via communications.  \\\hline
+            Transmission Mode & In this mode the camera is almost constantly transmitting images taken through the camera. \\\hline
             etc. (Other Modes) &   \\\hline
         \end{tabular} } 
-    \end{table}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \caption{SnapSat State Diagram}
+    \vspace{0.15cm}
+    Insert State diagram showing transitions between states
+\end{figure}
