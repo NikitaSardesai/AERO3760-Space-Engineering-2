@@ -17,129 +17,55 @@ A general schedule for the SnapSat project is outlined below. A Gantt chart is p
         \end{tabular} } 
     \end{table}
     
-\begin{landscape}
 \subsection{Gantt Chart}
-
-\definecolor{barblue}{RGB}{153,204,254}
-\definecolor{groupblue}{RGB}{51,102,254}
-\definecolor{linkred}{RGB}{165,0,33}
-\renewcommand\sfdefault{phv}
-\renewcommand\mddefault{mc}
-\renewcommand\bfdefault{bc}
-%\setganttlinklabel{s-s}{START-TO-START}
-%\setganttlinklabel{f-s}{FINISH-TO-START}
-%\setganttlinklabel{f-f}{FINISH-TO-FINISH}
-
-%
-%\begin{ganttchart}[y unit chart=0.8cm,
-%    canvas/.append style={fill=none, draw=black!5, line width=.75pt},
-%    hgrid style/.style={draw=black!5, line width=.75pt},
-%    vgrid={*1{draw=black!5, line width=.75pt}},
-%    today=3,
-%    today rule/.style={
-%        draw=black!64,
-%        dash pattern=on 3.5pt off 2.5pt,
-%        line width=1pt
-%    },
-%    today label font=\small\bfseries,
-%    title/.style={draw=none, fill=none},
-%    title label font=\bfseries\footnotesize,
-%    title label node/.append style={below=7pt},
-%    include title in canvas=false,
-%    bar label font=\mdseries\small\color{black!70},
-%    bar label node/.append style={left=0.8cm},
-%    bar/.append style={draw=black, fill=black!63},
-%    bar incomplete/.append style={fill=barblue},
-%    bar progress label font=\mdseries\footnotesize\color{black!70},
-%    group incomplete/.append style={draw=black,fill=groupblue},
-%    group left shift=0,
-%    group right shift=0,
-%    group height=.35,
-%    group peaks tip position=0,
-%    group label node/.append style={left=.4cm},
-%    group progress label font=\bfseries\small,
-%    link/.style={-latex, line width=1.5pt, linkred},
-%    link label font=\scriptsize\bfseries,
-%    link label node/.append style={below left=-2pt and 0pt}
-%    ]{1}{37}
-%    \gantttitle[
-%    title label node/.append style={below left=7pt and -3pt}
-%    ]{WEEKS:$\,\,\,\,\,\,$1$\,\,\,\,\,\,$}{2}
-%    \gantttitlelist{2,...,13}{3} \\
-%    \ganttgroup[progress=10]{Preliminary Design Report}{1}{10
-%        } \\
-%    \ganttbar[
-%    progress=20,
-%    name=components
-%    ]{\textbf Component Selection}{1}{3} \\
-%    \ganttbar[
-%    progress=0,
-%    name=links
-%    ]{\textbf Link Budgets}{3}{4} \\
-%    \ganttbar[
-%    progress=0,
-%    name=structure
-%    ]{\textbf Structural Design}{3}{4} \\
-%    \ganttbar[
-%    progress=30,
-%    name=mass
-%    ]{\textbf Mass Budget}{2}{4} \\
-%    \ganttbar[
-%    progress=0,
-%    name=power
-%    ]{\textbf Power Budget}{2}{4} \\[grid]
-%    \ganttgroup[progress=0]{Critical Design Review}{4}{11} \\
-%    \ganttbar[progress=0]{\textbf Component Reselection}{4}{5} \\
-%    \ganttbar[progress=0]{\textbf{WBS 2.2} Activity F}{6}{8} \\
-%    \ganttbar[progress=0]{\textbf{WBS 2.3} Activity G}{9}{10}
-%%    \ganttlink[link type=s-s]{PDR1}{WBS1B}
-%%    \ganttlink[link type=f-s]{WBS1B}{WBS1C}
-%%    \ganttlink[
-%%    link type=f-f,
-%%    link label node/.append style=left
-%%    ]{WBS1C}{WBS1D}
-%\end{ganttchart}
-%\makebox[0pt][c]{%
-%    \begin{minipage}[c]{210mm}
-        
-
-\begin{gantt}{15}{13}
+\begin{gantt}[xunitlength=0.9cm,drawledgerline=true]{31}{13}
   \begin{ganttitle}
      \numtitle{1}{1}{9}{1}
      \titleelement{-}{1}
      \numtitle{10}{1}{12}{1}
   \end{ganttitle}
         
-    \ganttgroup{{\bf Preliminary Design Report\qquad\quad}}{0}{4}
+    \ganttgroup{Preliminary Design\qquad\quad}{0}{4}
     \ganttbar{Component Selection\qquad\quad}{0}{3}
-    \ganttbar{Structural Design\qquad\quad}{1}{3}
+    \ganttbar[color=NavyBlue]{Structural Design\qquad\quad}{1}{3}
     \ganttbar{Link Budgets\qquad\quad}{2}{2}
     \ganttbar{Mass Budgets\qquad\quad}{2}{2}
     \ganttbar{Power Budgets\qquad\quad}{2}{2}
     
-    \ganttgroup{Critical Design Review\qquad\quad}{4}{9}
-    \ganttbar{Component Reselection\qquad\quad}{3}{2}
-    \ganttmilestone[color=red]{Order Componenets\qquad\quad}{6}
-    \ganttbarcon{Finanlise and Send Structure\qquad\quad}{6}{1}
-    \ganttmilestone{Receive Components\qquad\quad}{10}
-    \ganttbarcon{Build\qquad\quad}{10}{3}
-    \ganttmilestone[color=red]{Balloon Launch\qquad\quad}{13}
-               
-%%        \ganttbar{compile ViMuDat}{0}{1.5}
-%%        \ganttbarcon{create stubs}{1.5}{3}
-%%        \ganttbarcon{implement metadata}{4.5}{1}
-%%        \ganttmilestonecon{metadata works}{5.5}
-%%        
-%%        \ganttgroup{Upload}{4}{2.5}
-%%        \ganttbar{implement Matlab controler}{4}{2}
-%%        \ganttbar{implement file parser}{4}{1.5}
-%%        \ganttbarcon{implement add record}{5.5}{1}
-%%        \ganttbar{implement segmentation}{5.5}{1}
-%%        \ganttbar{implement registration}{5.5}{1}
-%%        \ganttbar{implement classification}{5.5}{1}
-%%        \ganttmilestonecon[color=red]{implementation finished}{7}
+    \ganttgroup{Critical Design\qquad\quad}{4}{9}
+    \ganttbar[pattern=crosshatch]{Component Reselection\qquad\quad}{3}{2}
+    \ganttbar{Budget Reevaluation\qquad\quad}{5}{1}
+    \ganttbar{PCB Design and Order\qquad\quad}{4}{3}
+    \ganttbar{Thermal Design\qquad\quad}{4}{4}
+    \ganttmilestone[color=NavyBlue]{Order Componenets\qquad\quad}{6}
+    \ganttbar[color=NavyBlue]{Finalise/Send Structure\qquad\quad}{5.5}{1.5}
+    \ganttbar{Report Compilation\qquad\quad}{6}{7}
+    
+    \ganttgroup{Code Development\qquad\quad}{3}{8}
+    \ganttbar{Environment Model\qquad\quad}{3}{3}
+    \ganttbar{Simulink Model\qquad\quad}{3}{4}
+    \ganttbar{Arduino\qquad\quad}{4}{6}
+    \ganttbar{Interface\qquad\quad}{5}{6}
+    
+    
+    \ganttgroup{Componenet Testing\qquad\quad}{9}{3}
+    \ganttbar[pattern=crosshatch]{Receive Components\qquad\quad}{9}{2}
+    \ganttbar{Thermal System Testing\qquad\quad}{9}{2}
+    \ganttbar{ADCS Testing\qquad\quad}{10}{2}
+    \ganttbar{Link Testing\qquad\quad}{10}{2}
+    \ganttbar{Solar Cell Testing\qquad\quad}{10}{2}
+    \ganttbar[color=NavyBlue]{Vibration and Intgeration\qquad\quad}{11}{1}
+    
+    \ganttgroup{Launch Preparation\qquad\quad}{10}{3}
+    \ganttbar[color=NavyBlue,pattern=crosshatch]{Assembly\qquad\quad}{10}{2}
+    \ganttbarcon{Final Testing\qquad\quad}{12}{1}
+    \ganttmilestonecon[color=red]{Balloon Launch\qquad\quad}{13}
+    
+%    \ganttcon{11}{21}{10}{28}
+\draw[-latex,rounded corners=1pt] (5\ganttunitlength,-8+0.1 + 0.2) -- (5\ganttunitlength+0.4*\ganttunitlength,-8+0.1+0.2) -- (5\ganttunitlength+0.4*\ganttunitlength,-8-0.4+0.2) -- (5\ganttunitlength-1.4*\ganttunitlength,-8-0.4+0.2) -- (5\ganttunitlength-1.4*\ganttunitlength,-12+0.1+0.2) -- (6\ganttunitlength,-12+0.1+0.2);
+
+\draw[-latex,rounded corners=1pt] (6\ganttunitlength,-12+0.1 + 0.2) -- (6\ganttunitlength+0.4*\ganttunitlength,-12+0.1+0.2) -- (6\ganttunitlength+0.4*\ganttunitlength,-12-0.4+0.2) -- (6\ganttunitlength-3.4*\ganttunitlength,-12-0.4+0.2) -- (6\ganttunitlength-3.4*\ganttunitlength,-21+0.1+0.2) -- (9\ganttunitlength,-21+0.1+0.2);
+    
+\draw[-latex,rounded corners=1pt] (11\ganttunitlength,-21+0.1 + 0.2) -- (11\ganttunitlength+0.4*\ganttunitlength,-21+0.1+0.2) -- (11\ganttunitlength+0.4*\ganttunitlength,-21-0.4+0.2) -- (11\ganttunitlength-2.4*\ganttunitlength,-21-0.4+0.2) -- (11\ganttunitlength-2.4*\ganttunitlength,-28+0.1+0.2) -- (10\ganttunitlength,-28+0.1+0.2);
+
 \end{gantt}
-%\end{minipage}%
-%}
-%
-\end{landscape}
