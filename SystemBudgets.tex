@@ -1,30 +1,46 @@
 \section{System Budgets}
 This section detail the power and mass budgets of SnapSat. (overview/description)
 
-\subsection{Mass Budget}
-\begin{landscape} 
-%\begin{figure}[H]
-%\vspace{-0.3cm}
+
+\subsection{Mass Budget} 
+The mass budget is shown in table~\ref{tab:massbudget}, it is ensured that \textit{SnapSat} meets the requirement of a maximum weight of 1kg. The component masses were used to determine the center of gravity for the satellie, it is desirable to keep this located close to the geometric centre as the attitude control system (magneto-torques) are placed on the outermost surfaces. Centroid averaging across all three axes was used to calculate this as follows
+\[
+x_{cg} = \cfrac{\Sigma x_i\cdot m_i}{\Sigma m_i} \qquad y_{cg} = \cfrac{\Sigma y_i\cdot m_i}{\Sigma m_i} \qquad z_{cg} = \cfrac{\Sigma z_i\cdot m_i}{\Sigma m_i}
+\]
+\noindent
+The moment of inertia about all three axes is given by
+\[ I = \int r^2\,\,dm \]
+\noindent
+The inertial of each individual component was ignored, assuming these were roughly symmetrical. Only the relative locations of the component contributed to the total inertia. Thus, the inertias were given
+\begin{eqnarray} 
+I_{xx} &=& \cfrac{1}{\Sigma m_i}\,\cdot\,\left( \Sigma \sqrt{(y_i-y_{cg})^2+(z_i-z_{cg})^2}\,\cdot\,m_i \right) \\
+I_{yy} &=& \cfrac{1}{\Sigma m_i}\,\cdot\,\left( \Sigma \sqrt{(x_i-x_{cg})^2+(z_i-z_{cg})^2}\,\cdot\,m_i \right) \\
+I_{zz} &=& \cfrac{1}{\Sigma m_i}\,\cdot\,\left( \Sigma \sqrt{(x_i-x_{cg})^2+(y_i-y_{cg})^2}\,\cdot\,m_i \right) 
+\end{eqnarray} 
+\noindent
+where $x_i$, $y_i$ and $z_i$ are the positions of each component and $m_i$ is the mass of each component.
+
+\begin{landscape}
 \begin{table}[H]
     \centering
     \caption{SnapSat Mass Budget}
     \vspace{0.15cm}
-%    \label{tab:designoverview}
+    \label{tab:massbudget}
     {\renewcommand{\arraystretch}{1.4}%
-    \begin{tabular}{|>{\arraybackslash}m{2.6cm}||>{\arraybackslash}m{2.5cm}|>{\arraybackslash}m{2.5cm}|>{\arraybackslash}m{3cm}|>{\arraybackslash}m{3cm}|}
+    \begin{tabular}{|>{\arraybackslash}m{3cm}||>{\arraybackslash}m{2cm}|>{\arraybackslash}m{2.3cm}|>{\arraybackslash}m{2cm}|>{\arraybackslash}m{2cm}|>{\arraybackslash}m{2cm}|>{\arraybackslash}m{2cm}|>{\arraybackslash}m{2.5cm}|}
             \hline
-            {\bf Subsystem} & {\bf Mass (g)} & {\bf Contingency (g)} & {\bf Mass $+$ Contingency (g)} & {\bf Fraction of Total Mass (\%)} \\ \hline\hline
-            Structural &  &  &  &  \\ \hline
-            ADCS &  &  &  &  \\ \hline
-            EPS &  &  &  &  \\ \hline
-            OBS / OBDH &  &  &  &  \\ \hline
-            TT\&C &  &  &  &  \\ \hline
-            Thermal &  &  &  &  \\ \hline
-            Payload &  &  &  &  \\ \hline
-            Integration &  &  &  &  \\ \hline\hline
-            \textbf{Total} &  &  &  &  \\ \hline
-            \textit{Target Mass} & $-$ & $-$ &  & $-$ \\ \hline
-            \textbf{Mass Margin} & $-$ & $-$ &  &  \\ \hline
+            {\bf Subsystem} & {\bf Mass (g)} & {\bf Contingency (g)} & {\bf Fraction of Total Mass} & {\bf X Position (mm)} & {\bf Y Position (mm)} & {\bf Z Position (mm)} & {\bf Distance from Geometric Center (mm)} \\ \hline\hline
+            Structural &  &  &  &  &  &  &  \\ \hline
+            ADCS &  &  &  &  &  &  &  \\ \hline
+            EPS &  &  &  &  &  &  &  \\ \hline
+            OBS / OBDH &  &  &  &  &  &  &  \\ \hline
+            TT\&C &  &  &  &  &  &  &  \\ \hline
+            Thermal &  &  &  &  &  &  &  \\ \hline
+            Payload &  &  &  &  &  &  &  \\ \hline
+            Integration &  &  &  &  &  &  &  \\ \hline
+            Total &  &  &  &  &  &  &  \\ \hline
+            Mass Margin &  &  &  &  &  &  &  \\ \hline
+            Inertias &  &  &  & $I_{xx}=$ & $I_{yy}=$ & $I_{zz}=$ &  \\ \hline
     \end{tabular} } 
 \end{table} \vspace{0.3cm}
 %\end{figure} 
