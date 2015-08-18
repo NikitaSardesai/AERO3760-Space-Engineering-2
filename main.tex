@@ -3,11 +3,12 @@
 \usepackage{fourier}
 \usepackage[T1]{fontenc}
 
+
 \usepackage{lscape}
 \usepackage{amsmath}
 %\usepackage{framed,enumerate}
 %\usepackage{cite}
-\usepackage{color}
+%\usepackage{color}
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 \usepackage[justification=centering]{caption}
 \usepackage{ragged2e,float}
@@ -23,6 +24,8 @@
 \setstackTAB{*}
 \geometry{left=20mm,right=20mm,top=20mm,bottom=20mm}
 \usepackage{gantt}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
 
 % FOR TIKZ AND LABELS
 \newlength\figureheight
@@ -92,7 +95,6 @@
     \includegraphics[width=#1\linewidth]{#2} \caption{#3}}
 %\newcommand{\unit}[2]{\frac{\text{#1}}{\text{#2}}}
 
-
 \begin{document}
     
 \input{titlepage}
@@ -113,6 +115,9 @@
 \input{SpacecraftModesOfOperation}
 
 \newpage
+\input{StructuralDesign}
+
+\newpage
 \input{SystemBudgets}
 
 \newpage
@@ -121,14 +126,14 @@
 \newpage
 \input{Comments}
 
-\newpage
-\nocite{*}
-\bibliographystyle{ieeetr}
-\bibliography{bib}
-
-\newpage
-\appendix
-\input{Appendix}
+%\newpage
+%\nocite{*}
+%\bibliographystyle{ieeetr}
+%\bibliography{bib}
+%
+%\newpage
+%\appendix
+%\input{Appendix}
 
 \end{document}
 

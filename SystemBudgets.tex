@@ -18,33 +18,38 @@ I_{yy} &=& \cfrac{1}{\Sigma m_i}\,\cdot\,\left( \Sigma \sqrt{(x_i-x_{cg})^2+(z_i
 I_{zz} &=& \cfrac{1}{\Sigma m_i}\,\cdot\,\left( \Sigma \sqrt{(x_i-x_{cg})^2+(y_i-y_{cg})^2}\,\cdot\,m_i \right) 
 \end{eqnarray} 
 \noindent
-where $x_i$, $y_i$ and $z_i$ are the positions of each component and $m_i$ is the mass of each component.
+and so on; where $x_i$, $y_i$ and $z_i$ are the positions of each component and $m_i$ is the mass of each component. The inertial matrix was computed using \textit{Solidworks}. It was found to be:
+\begin{equation}
+    I = \bmat{0.4cm}{I_{xx} * I_{xy} * I_{xz} @
+                 I_{yx} * I_{yy} * I_{yz} @
+                 I_{zx} * I_{zy} * I_{zz}}
+\end{equation}
 
-\begin{landscape}
+%\begin{landscape}
 \begin{table}[H]
     \centering
     \caption{SnapSat Mass Budget}
     \vspace{0.15cm}
     \label{tab:massbudget}
     {\renewcommand{\arraystretch}{1.4}%
-    \begin{tabular}{|>{\arraybackslash}m{3cm}||>{\arraybackslash}m{2cm}|>{\arraybackslash}m{2.3cm}|>{\arraybackslash}m{2cm}|>{\arraybackslash}m{2cm}|>{\arraybackslash}m{2cm}|>{\arraybackslash}m{2cm}|>{\arraybackslash}m{2.5cm}|}
+    \begin{tabular}{|>{\arraybackslash}m{3cm}||>{\arraybackslash}m{2.5cm}|>{\arraybackslash}m{2.5cm}|>{\arraybackslash}m{2.3cm}|>{\arraybackslash}m{2.3cm}|}
             \hline
-            {\bf Subsystem} & {\bf Mass (g)} & {\bf Contingency (g)} & {\bf Fraction of Total Mass} & {\bf X Position (mm)} & {\bf Y Position (mm)} & {\bf Z Position (mm)} & {\bf Distance from Geometric Center (mm)} \\ \hline\hline
-            Structural &  &  &  &  &  &  &  \\ \hline
-            ADCS &  &  &  &  &  &  &  \\ \hline
-            EPS &  &  &  &  &  &  &  \\ \hline
-            OBS / OBDH &  &  &  &  &  &  &  \\ \hline
-            TT\&C &  &  &  &  &  &  &  \\ \hline
-            Thermal &  &  &  &  &  &  &  \\ \hline
-            Payload &  &  &  &  &  &  &  \\ \hline
-            Integration &  &  &  &  &  &  &  \\ \hline
-            Total &  &  &  &  &  &  &  \\ \hline
-            Mass Margin &  &  &  &  &  &  &  \\ \hline
-            Inertias &  &  &  & $I_{xx}=$ & $I_{yy}=$ & $I_{zz}=$ &  \\ \hline
+            {\bf Subsystem} & {\bf Mass (g)} & {\bf Contingency (g)} & {\bf Mass and Contingency} & {\bf Fraction of Total Mass} \\ \hline\hline
+            Structural &  &  &  &  \\ \hline
+            ADCS &  &  &  &  \\ \hline
+            EPS &  &  &  & \\ \hline
+            OBS / OBDH &  &  &  & \\ \hline
+            TT\&C &  &  &  &  \\ \hline
+            Thermal &  &  &  &  \\ \hline
+            Payload &  &  &  &  \\ \hline
+            Integration &  &  &  &  \\ \hline
+            Total &  &  &  & \\ \hline
+            Mass Margin &  &  &  &  \\ \hline
+            Inertias &  &  &  &  \\ \hline
     \end{tabular} } 
 \end{table} \vspace{0.3cm}
 %\end{figure} 
-\end{landscape}
+%\end{landscape}
 
 
 \subsection{Power Budget}
@@ -78,7 +83,7 @@ where $x_i$, $y_i$ and $z_i$ are the positions of each component and $m_i$ is th
     \end{table} \vspace{0.3cm}
 
 \subsection{Pointing Budget}
-Pointing budget CALCULATIONS
+Since this spacecraft is performing Earth observation, it requires a pointing budget. This refers to the ability to orient the spacecraft towards
 
 \subsection{Link Budgets}
 Calculations for both link budgets (list assumptions here).
