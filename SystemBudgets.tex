@@ -66,7 +66,7 @@ and so on; where $x_i$, $y_i$ and $z_i$ are the positions of each component and 
     \centering
     \caption{SnapSat Power Budget}
     \vspace{0.15cm}
-    \label{tab:designoverview}
+%    \label{tab:designoverview}
     {\renewcommand{\arraystretch}{1.4}%
         \begin{tabular}{|>{\arraybackslash}m{2cm}||>{\arraybackslash}m{2cm}|>{\arraybackslash}m{2cm}|>{\arraybackslash}m{1.4cm}|>{\arraybackslash}m{1.4cm}|>{\arraybackslash}m{1.4cm}|>{\arraybackslash}m{1.4cm}|>{\arraybackslash}m{1.4cm}|}
            \hline
@@ -109,16 +109,15 @@ This is summarised in the table below
 
 \begin{table}[H]
     \centering
-    \caption{Error calculation breakdown}
+    \caption{Pointing budget error calculation breakdown}
     \vspace{0.1cm}
-    \label{tab:maxturbulencealpha}
     {\renewcommand{\arraystretch}{1.4}%
         \begin{tabular}{|>{\centering\arraybackslash}m{2.3cm}|>{\centering\arraybackslash}m{2.3cm}|>{\centering\arraybackslash}m{2.3cm}|>{\centering\arraybackslash}m{2.5cm}|>{\centering\arraybackslash}m{2cm}|>{\centering\arraybackslash}m{2cm}|}
             \hline
             & {\bf IMU Error (\%)} & {\bf Sun Tracker Error (\%)} & {\bf Magnetorquer Error (\%)} & {\bf Total (\%)} & {\bf Total (\deg)} \\ \hline\hline
             Overall System & 2.0 & 0.5 & 1.0 & 2.3 & 8.3 \\ \hline
-            System 1 & 2.0 &  & 1.0 & 2.2 & 7.9 \\ \hline
-            System 2 &  & 1.0 & 1.0 & 1.1 & 4.0 \\ \hline
+            System 1 & 2.0 & - & 1.0 & 2.2 & 7.9 \\ \hline
+            System 2 & - & 1.0 & 1.0 & 1.1 & 4.0 \\ \hline
         \end{tabular} } 
     \end{table}
 

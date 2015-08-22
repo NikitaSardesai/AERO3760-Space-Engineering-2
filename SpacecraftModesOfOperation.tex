@@ -1,34 +1,22 @@
 \section{Spacecraft Modes of Operation}
-The spacecraft will experience the following modes during its lifetime. A different configuration of system operations and instructions will be executed by \textit{SnapSat} in each case. These are summarised in table~\ref{tab:modesofoperation} below.
+The spacecraft will experience the following modes during its lifetime. A different configuration of system operations and instructions will be executed by \textit{SnapSat} in each case. These are summarised in below.
 
-\begin{table}[H]
-    \centering
-    \caption{SnapSat Modes of Operation}
-    \vspace{0.15cm}
-    \label{tab:modesofoperation}
-    {\renewcommand{\arraystretch}{1.3}%
-        \begin{tabular}{|>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{3cm}|>{\arraybackslash}m{12.5cm}|}
-            \hline
-            \textbf{Spacecraft Mode} & \textbf{Description} \\ \hline\hline
-            Launch Mode &  This turns the satellite off for launch to comply with CubeSat Design Specification 2.3.1. During launch the deployment switch is tripped which will turn the satellite on and transfer it into Establish Contact Mode.
-            \\\hline
-            Safe mode & In this mode, only essential satellite systems are kept ON such as the OBC, power board and VHF receiver. The attitude is not controlled and the transmitter is turned on occasionally for status updates.  
-             \\\hline
-            Recovery/De-tumble mode & This mode is used to de-tumble the spacecraft after deployment into orbit as well as to recover it from any spin states (such as after Safe Mode). All Safe Mode components are ON, as well as the ADCS system. Other devices can be turned ON by ground command.  
-            \\\hline
-			Establish Contact Mode & In this mode the satellite waits 30 seconds before deploying the antenna and attempting to communicate with the ground station. The ACS system works to orient the satellite correctly.
-            \\\hline
-            Payload Operation Mode & This mode is used only when taking a picture.  The camera module is booted up, the camera takes a picture, stores it is RAM/ROM and then the camera is powered town again to conserve power.  This mode can be triggered by reaching a preset GPS location or manually via communications.  This mode can be entered either by reaching a GPS coordinate or through ground control command.  It exists this mode straight into Relay Picture Mode.
-            \\\hline
-            Relay Picture Mode & This mode is entered after Payload Operation Mode and causes the CubeSat to start sending pictures to the ground station. 
-            \\\hline
-            Relay Picture Mode & In this mode the camera is almost constantly transmitting images taken through the camera.  It exists into Telemetry Mode when the picture has been sent. 
-            \\\hline
-            Telemetry Mode & In this mode the CubeSat is idle, just displaying basic telemetry.  Attitude controlled.
-            \\\hline
-            etc. (Other Modes) &   \\\hline
-        \end{tabular} } 
-\end{table}
+\noindent
+\textbf{Launch Mode: } This turns the satellite off for launch to comply with CubeSat Design Specification 2.3.1. During launch the deployment switch is tripped which will turn the satellite on and transfer it into Establish Contact Mode. \\
+\noindent
+\textbf{Safe mode: } In this mode, only essential satellite systems are kept ON such as the OBC, power board and VHF receiver. The attitude is not controlled and the transmitter is turned on occasionally for status updates. \\ 
+\noindent 
+\textbf{Recovery/De-tumble mode: } This mode is used to de-tumble the spacecraft after deplopment into orbit as well as to recover it from any spin states (such as after Safe Mode). All Safe Mode components are ON, as well as the ADCS system. Other devices can be turned ON by ground command. \\
+\noindent
+\textbf{Establish Contact Mode: }In this mode the satellite waits 30 seconds before deploying the antenna and attempting to communicate with the ground station. The ACS system works to orient the satellite correctly. \\
+\noindent
+\textbf{Payload Operation Mode: } This mode is used only when taking a picture.  The camera module is booted up, the camera takes a picture, stores it is RAM/ROM and then the camera is powered town again to conserve power.  This mode can be triggered by reaching a preset GPS location or manually via communications.  This mode can be entered either by reaching a GPS coordinate or through ground control command.  It exists this mode straight into Relay Picture Mode. \\
+\noindent
+\textbf{Relay Picture Mode: } This mode is entered after Payload Operation Mode and causes the CubeSat to start sending pictures to the ground station. \\
+\noindent
+\textbf{Relay Picture Mode: } In this mode the camera is almost constantly transmitting images taken through the camera.  It exists into Telemetry Mode when the picture has been sent. \\
+\noindent 
+\textbf{Telemetry Mode: } In this mode the CubeSat is idle, just displaying basic telemetry.  Attitude controlled.
 
 \tikzstyle{block} = [rectangle, draw, line width=1pt, fill=none, 
 text width=3cm, text centered, rounded corners, minimum height=1cm]
