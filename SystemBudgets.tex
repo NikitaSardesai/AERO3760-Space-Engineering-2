@@ -90,7 +90,41 @@ and so on; where $x_i$, $y_i$ and $z_i$ are the positions of each component and 
     \end{table} \vspace{0.3cm}
 
 \subsection{Pointing Budget}
-Since this spacecraft is performing Earth observation, it requires a pointing budget. This refers to the ability to orient the spacecraft towards a target having a specific geographical orientation. Along with the pointing accuracy, the satellite needs to be able to map the location from its own location. Errors in both pointing and mapping accuracies will be discussed here.
+Since this spacecraft is performing Earth observation, it requires a pointing budget. This refers to the ability to orient the spacecraft towards a target having a specific geographical orientation. Along with the pointing accuracy, the satellite needs to be able to map the location from its own location. Errors in both pointing and mapping accuracies will be discussed here. \\
+\\\noindent
+The attitude control system for SnapSat will consist of three air core magnetorquers operating on 3 separate planes capable of producing 0.05Am$^2$ each.  Only two of the magnetorquers can work at any one time, which will reduce total power usage for the system.  The first component of the determination system is a 9-DOF IMU which will primarily be used in the de-tumble phase due to accumulated error issues with this equipment which are expected to occur later in the mission.  The second component is a solar tracker system consisting of six photodiode pins, one on each face, which will be used to accurately determine the attitude of the satellite based on the location of the Sun. \\
+\\\noindent
+According to the specification data, the IMU will experience a 2\% error based on the expected temperature range, although this will increase over the course of the mission due to the accumulated error.  Although the exact error will need to be calculated during calibration and testing, based on current literature there are a number of similar solar tracking systems which are able to achieve an accuracy of 0.2\% \cite{beaudette}.  However given the lost cost budget a conservative estimate of 0.5\% will be used for the solar tracker error.  In regards to the magnetorquers expected error based on similar models 1\%, although error will be finalised during the calibration and testing phase.
+\subsubsection{Error Calculation}
+Due to the fact that the two attitude determination systems will almost always be used separately we have calculated three different total errors. The total errors were calculated using the following formula:
+\begin{eqnarray}
+\text{System Error} &=& \sqrt{(\text{IMU error})^2+(\text{sun sensor error})^2+(\text{magnetorquers error})^2} \\
+&=& \sqrt{(2\%)^2+(0.5\%)^2+(1\%)^2} \\
+&=& 2.3\% \\
+&=& 8.3\deg
+\end{eqnarray}
+This is summarised in the table below
+
+\begin{table}[H]
+    \centering
+    \caption{Error calculation breakdown}
+    \vspace{0.1cm}
+    \label{tab:maxturbulencealpha}
+    {\renewcommand{\arraystretch}{1.4}%
+        \begin{tabular}{|>{\centering\arraybackslash}m{2.3cm}|>{\centering\arraybackslash}m{2.3cm}|>{\centering\arraybackslash}m{2.3cm}|>{\centering\arraybackslash}m{2.5cm}|>{\centering\arraybackslash}m{2cm}|>{\centering\arraybackslash}m{2cm}|}
+            \hline
+            & {\bf IMU Error (\%)} & {\bf Sun Tracker Error (\%)} & {\bf Magnetorquer Error (\%)} & {\bf Total (\%)} & {\bf Total (\deg)} \\ \hline\hline
+            Overall System & 2.0 & 0.5 & 1.0 & 2.3 & 8.3 \\ \hline
+            System 1 & 2.0 &  & 1.0 & 2.2 & 7.9 \\ \hline
+            System 2 &  & 1.0 & 1.0 & 1.1 & 4.0 \\ \hline
+        \end{tabular} } 
+    \end{table}
+
+\noindent
+The majority of the mission is expected to be spent using system 2 (utilising the sun trackers), which produces an error of 4\deg.  Whilst this is within the range for the widest application of the three mapping scenarios (see Appendix~\ref{app:mapping}) it is slightly outside of the range of the second more focused scenario.  However, it should be noted that these are conservative calculations and the finalised error may be lower than these figures. 
+
+
+ 
 
 \subsection{Link Budgets}
 Calculations for both link budgets (list assumptions here).

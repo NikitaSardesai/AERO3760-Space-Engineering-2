@@ -1,3 +1,57 @@
-\section{Appendix: Supplementary Plots and Data}
+\section{Appendix: Supplementary Calculations}
 
-\section{Appendix: MATLAB Codes}
+\subsection{Mapping Calculation Considerations} \label{app:mapping}
+Calculations are based on an orbit of 300km altitude. In general if we are targeting cities, metropolitan areas for a number of major cities are approximately 100 km2.  Thus assume a target size of 10km by 10km.  For an orbit path that goes directly over the city:
+\[
+\alpha = 2\times \tan^{-1}\left(\cfrac{5}{300}\right) = 1.9\deg
+\]
+\noindent
+This is a very narrow window however if we instead photograph an area of 100km by 100km, or 10,000km$^2$ (roughly the area of Sydney), this equation changes to:
+\[
+\alpha = 2\times \tan^{-1}\left(\cfrac{50}{300}\right) = 18.9\deg
+\]
+\noindent
+Thus if the satellite is misaligned by as much as 8.5\deg in any direction it will still capture the original 10km by 10km area that was intended.  However this is a much larger area and as such there will be less focus on the intended target.  Thus the third option is a 50km by 50km picture:
+\[
+\alpha = 2\times \tan^{-1}\left(\cfrac{25}{300}\right) = 9.5\deg
+\]
+\noindent
+This image would provide greater focus but would require the attitude of the satellite to be within 3.8\deg accuracy of the measured attitude. It must be noted that this calculation is for an orbit where the satellite will pass directly over the target area.  If this does not occur it will require the satellite to be more accurately aligned due to the fact that it is aiming at a comparatively smaller target.  However at small angles this effect is not that significant and since the idea of the mission is to capture cities only when the satellite passes over them it should not be a major issue or consideration.
+
+\subsection{Magnetorquer Calculations}
+Although there is significant data to support the fact that a 0.05Am2 magnetorquer will be powerful enough to control a satellite in space I did some simplistic calculations to check it on an order of magnitude basis. Calculation of the magnetic dipole of the magnetorquer:
+\[
+M = NiA = 312\times0.025\times0.064 \,\,\,=\,\,\, 0.05 \text{ Am}^2
+\]
+\noindent
+Calculation of the minimum earth’s magnetic field at 300km:
+\[
+B = \cfrac{\mu_0 m_e}{4\pi R^3} \,\,\, = \,\,\, 2.68\times 10^{-6}
+\]
+\noindent
+Calculation of torque:
+\[
+T = M\times B \,\,\, = \,\,\, 1.34\times 10^{-6}
+\]
+\noindent
+Given the satellite will weigh 1kg and its centre of mass is at the structural centre of the satellite.  Assuming that the magnetorquers are located 1cm away from the edge of the satellite.  Thus we use the equation:
+\[
+T = mr^2\alpha
+\]
+\noindent
+so then
+\begin{eqnarray}
+    \alpha &=& \cfrac{1.34\times 10^{-6}}{1\times0.05^2} \\
+    &=& 5.36\times 10^{-4} \text{ rad/s}^2 \\
+    &=& 0.0307 \text{ deg/s}^2
+\end{eqnarray}
+\noindent
+Design requirements for the system are that it can recover from a 10 deg/s spin within two days.  Assuming average acceleration and that the correct axis is perpendicular to the earths magnetic field.
+\begin{eqnarray}
+    t &=& \cfrac{\omega}{\alpha} \\
+    &=& \cfrac{10}{0.0307} \\
+    &=& 326 \text{ seconds} \\
+    &=& 5.5 \text{ minutes}
+\end{eqnarray}
+\noindent
+This is obviously an oversimplification and there are a number of other factors involved which will cause this number to increase.  However it is clear from these calculations that the system will have the power to recover form a 10 deg/s spin within the two-day limit.
