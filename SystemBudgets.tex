@@ -23,8 +23,13 @@ and so on; where $x_i$, $y_i$ and $z_i$ are the positions of each component and 
 \begin{equation}
     I = \bmat{0.4cm}{I_{xx} * I_{xy} * I_{xz} @
                  I_{yx} * I_{yy} * I_{yz} @
-                 I_{zx} * I_{zy} * I_{zz}} =
+                 I_{zx} * I_{zy} * I_{zz}} = 
+    \bmat{0.4cm}{886508.05 * 287196.55 * 245002.46 @
+                 287196.55 * 77032823 * 292616.34 @
+                 245002.46 * 292616.34 * 880334.84}\text{ g$\cdot$ mm}^2
 \end{equation}
+\noindent
+{\it note: would be better after we put the components in}
 
 %\begin{landscape}
 \begin{table}[H]
@@ -37,7 +42,7 @@ and so on; where $x_i$, $y_i$ and $z_i$ are the positions of each component and 
             \hline
             {\bf Subsystem} & {\bf Mass} & {\bf Contingency} & {\bf Mass $+$ Contingency} & {\bf Fraction of Total Mass} \\ \hline\hline
             {\it Structural} \newline - chassis \newline - solar panels 
-            & {\quad}\newline140g\newline $9\times25$g & {\quad}\newline25g\newline $9\times5$g & 435g &  \\ \hline
+            & {\quad}\newline100g\newline $9\times25$g & {\quad}\newline30g\newline $9\times5$g & 415g &  \\ \hline
             {\it ADCS} \newline - air core coils \newline - sun sensors \newline - IMU
             & {\quad}\newline$3\times50$g\newline $6\times1.8$g\newline 2.8g & {\quad}\newline$3\times5$g\newline $6\times0.3$g\newline0.4g & 180.2g &  \\ \hline
             {\it EPS} \newline - batteries \newline - power bus
