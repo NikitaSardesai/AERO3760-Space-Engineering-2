@@ -6,7 +6,7 @@ This section detail the power and mass budgets of SnapSat. (overview/description
 \subsection{Mass Budget} 
 The mass budget is shown in table~\ref{tab:massbudget}, it is ensured that \textit{SnapSat} meets the requirement of a maximum weight of 1kg. The component masses were used to determine the center of gravity for the satellite, it is desirable to keep this located close to the geometric centre as the attitude control system (magneto-torquers) are placed on the outermost surfaces.Centroid averaging across all three axes was used to calculate this as follows
 \[
-x_{cg} = \cfrac{\Sigma x_i\cdot m_i}{\Sigma %m_i} \qquad y_{cg} = \cfrac{\Sigma y_i\cdot %m_i}{\Sigma m_i} \qquad z_{cg} = %\cfrac{\Sigma z_i\cdot m_i}{\Sigma m_i}
+x_{cg} = \cfrac{\Sigma x_i\cdot m_i}{\Sigma m_i} \qquad y_{cg} = \cfrac{\Sigma y_i\cdot m_i}{\Sigma m_i} \qquad z_{cg} = \cfrac{\Sigma z_i\cdot m_i}{\Sigma m_i}
 \]
 \noindent
 The moment of inertia about all three axes is given by
@@ -91,7 +91,7 @@ and so on; where $x_i$, $y_i$ and $z_i$ are the positions of each component and 
     \end{table} \vspace{0.3cm}
 
 \subsection{Pointing Budget}
-<<<<<<< Updated upstream
+
 Since this spacecraft is performing Earth observation, it requires a pointing budget. This refers to the ability to orient the spacecraft towards a target having a specific geographical orientation. Along with the pointing accuracy, the satellite needs to be able to map the location from its own location. Errors in both pointing and mapping accuracies will be discussed here. \\
 \\\noindent
 The attitude control system for SnapSat will consist of three air core magnetorquers operating on 3 separate planes capable of producing 0.05Am$^2$ each.  Only two of the magnetorquers can work at any one time, which will reduce total power usage for the system.  The first component of the determination system is a 9-DOF IMU which will primarily be used in the de-tumble phase due to accumulated error issues with this equipment which are expected to occur later in the mission.  The second component is a solar tracker system consisting of six photodiode pins, one on each face, which will be used to accurately determine the attitude of the satellite based on the location of the Sun. \\
