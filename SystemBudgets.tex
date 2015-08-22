@@ -3,7 +3,7 @@ This section detail the power and mass budgets of SnapSat. (overview/description
 
 
 \subsection{Mass Budget} 
-The mass budget is shown in table~\ref{tab:massbudget}, it is ensured that \textit{SnapSat} meets the requirement of a maximum weight of 1kg. The component masses were used to determine the center of gravity for the satellie, it is desirable to keep this located close to the geometric centre as the attitude control system (magneto-torques) are placed on the outermost surfaces. Centroid averaging across all three axes was used to calculate this as follows
+The mass budget is shown in table~\ref{tab:massbudget}, it is ensured that \textit{SnapSat} meets the requirement of a maximum weight of 1kg. The component masses were used to determine the center of gravity for the satellite, it is desirable to keep this located close to the geometric centre as the attitude control system (magneto-torquers) are placed on the outermost surfaces.Centroid averaging across all three axes was used to calculate this as follows
 \[
 x_{cg} = \cfrac{\Sigma x_i\cdot m_i}{\Sigma m_i} \qquad y_{cg} = \cfrac{\Sigma y_i\cdot m_i}{\Sigma m_i} \qquad z_{cg} = \cfrac{\Sigma z_i\cdot m_i}{\Sigma m_i}
 \]
@@ -28,23 +28,31 @@ and so on; where $x_i$, $y_i$ and $z_i$ are the positions of each component and 
 %\begin{landscape}
 \begin{table}[H]
     \centering
-    \caption{SnapSat Mass Budget}
+    \caption{SnapSat Mass Budget (target mass of 1000 g)}
     \vspace{0.15cm}
     \label{tab:massbudget}
-    {\renewcommand{\arraystretch}{1.3}%
-    \begin{tabular}{|>{\arraybackslash}m{3cm}||>{\arraybackslash}m{2.5cm}|>{\arraybackslash}m{2.5cm}|>{\arraybackslash}m{2.3cm}|>{\arraybackslash}m{2.3cm}|}
+    {\renewcommand{\arraystretch}{1.2}%
+    \begin{tabular}{|>{\arraybackslash}m{3.5cm}||>{\arraybackslash}m{2.3cm}|>{\arraybackslash}m{2.3cm}|>{\arraybackslash}m{2.3cm}|>{\arraybackslash}m{2.3cm}|}
             \hline
-            {\bf Subsystem} & {\bf Mass (g)} & {\bf Contingency (g)} & {\bf Mass and Contingency} & {\bf Fraction of Total Mass} \\ \hline\hline
-            Structural &  &  &  &  \\ \hline
-            ADCS &  &  &  &  \\ \hline
-            EPS &  &  &  & \\ \hline
-            OBS / OBDH &  &  &  & \\ \hline
-            TT\&C &  &  &  &  \\ \hline
-            Thermal &  &  &  &  \\ \hline
-            Payload &  &  &  &  \\ \hline
-            Integration &  &  &  &  \\ \hline\hline
-            Total &  &  &  & \\ \hline
-            Mass Margin &  &  &  &  \\ \hline
+            {\bf Subsystem} & {\bf Mass} & {\bf Contingency} & {\bf Mass $+$ Contingency} & {\bf Fraction of Total Mass} \\ \hline\hline
+            {\it Structural} \newline - chassis \newline - solar panels 
+            & {\quad}\newline140g\newline $9\times25$g & {\quad}\newline25g\newline $9\times5$g & 435g &  \\ \hline
+            {\it ADCS} \newline - air core coils \newline - sun sensors \newline - IMU
+            & {\quad}\newline$3\times50$g\newline $6\times1.8$g\newline 2.8g & {\quad}\newline$3\times5$g\newline $6\times0.3$g\newline0.4g & 180.2g &  \\ \hline
+            {\it EPS} \newline - batteries \newline - power bus
+            &  &  &  & \\ \hline
+            {\it OBS / OBDH} \newline - Arduino board \newline - memory storage
+            & {\quad}\newline25g\newline1g & {\quad}\newline5g\newline 0.2g & 31.2g & \\ \hline
+            {\it TT\&C} \newline - antennae
+            &  &  &  &  \\ \hline
+            {\it Thermal} \newline - tapings \newline - MLI
+            & {\quad}\newline 1g\newline 3g & {\quad}\newline 0.3g\newline 0.5g & 4.8g &  \\ \hline
+            {\it Payload} \newline - camera
+            & {\quad}\newline25g & {\quad}\newline5g & 25g &  \\ \hline
+            {\it Integration} \newline - bolts/rivets \newline - cabling/wires
+            & {\quad}\newline 5g\newline2g & {\quad}\newline2g\newline0.5g & 9.5g &  \\ \hline\hline
+            {\bf Total} &  &  &  & \\ \hline
+            {\bf Mass Margin} &  &  &  &  \\ \hline
     \end{tabular} } 
 \end{table} \vspace{0.3cm}
 %\end{figure} 
