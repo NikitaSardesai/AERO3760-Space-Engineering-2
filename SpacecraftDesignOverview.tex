@@ -13,7 +13,7 @@ Summarised in table~\ref{tab:designoverview} below is the outline of all compone
             Structural & - industrial grade aluminium \newline - laser cut, bent to shape and riveted together \\\hline
             ADCS & - air core magneto-torquers made in-house \newline - Osram SFH203P Photodiodes \newline - IMU: Adafruit 9-DOF  \\\hline
             EPS & - Australian Robotics solar panels \newline - battery: LiNiMnCo 26650 rechargeable cell  \\\hline
-            OBC / OBDH & - Arduino DUE \newline - 4 $\times$ PCBs  \\\hline
+            OBC / OBDH & - Arduino DUE \newline - 4 $\times$ PCBs (power, control, EPS and communications)  \\\hline
            TT\&C & - VHF (Xbee) \newline - UHF \newline - tape measure antennae \\\hline
            Thermal & - thermal tapings and passive coatings (Kapton tape) \newline - selected components will have multi-layer insulation \\\hline
            Payload & - Arducam \\\hline
@@ -22,6 +22,16 @@ Summarised in table~\ref{tab:designoverview} below is the outline of all compone
     
 \subsection{Subsystem Design Schematic}
 The layout of Snapsat, with the interconnects of power and data lines between the subsystems is shown in the figure below. (NOTE: this is only an example for now)
+
+The Solar panels will be arranged according to Figure~\ref{fig:flower}.  This design has been chosen to maximize the solar panel area of the SnapSat while still abiding by the volume/size limitations of CubeSats.  Increasing the solar panel area has given us the ability to power a higher quality camera, increasing the performance of the payload and usefulness of the SnapSat.
+
+\begin{figure}[H]
+\label{fig:flower}
+\includegraphics[width=\textwidth]{flower.png}
+\caption{A similar design to ours (pretty much exactly the same)FOR THE LOVE OF GOD CHANGE IT BEFORE HANDING IN}
+\end{figure}
+
+In the following report yaw will be refereed to as rotation about the z axis, roll about the x axis and pitch about the y axis (although these are relatively interchangeable as the SnapSat is rotationally symmetric.)
 
 \begin{figure}[H]
     \pic{0.5}{DesignSchematicExample.png}{Design Schematic}
