@@ -4,13 +4,13 @@ The spacecraft will experience the following modes during its lifetime. A differ
 \noindent
 \textbf{Launch Mode: } This turns the satellite off for launch to comply with CubeSat Design Specification 2.3.1. During launch the deployment switch is tripped which will turn the satellite on and transfer it into Establish Contact Mode. \\
 \noindent
-\textbf{Startup Mode: }This mode is entered only when the CubeSat is first launched.  In this mode the satellite will immediately turn on the ADCS to detumble.  Once the CubeSat is sufficiently stable (not tumbling in the pitch or roll axis) or 30 seconds has elapsed (CubeSat Design Specification 2.4.2) the antennas and solar panels will be deployed. It will then move into Standby Mode. \\
+\textbf{Startup Mode: }This mode is entered only when the CubeSat is first launched.  In this mode the satellite will immediately turn on the ADCS to detumble.  Once the CubeSat is sufficiently stable (not tumbling in the pitch or roll axis) or 30 minutes has elapsed (CubeSat Design Specification 2.4.2) the antennas and solar panels will be deployed. It will then move into Standby Mode. \\
 \noindent
 \textbf{Standby Mode }In this mode, only essential satellite systems are kept ON.  This includes the OBC, EPS, VHF receiver,the GPS and intermittently the IMU.  It can transition out of Standby mode via an alert from the GPS, IMU, EPS or ground station orders.  \\
 \noindent
 \textbf{Payload Operation Mode: } This mode is used only when taking a picture and is entered through a location alert or ground station orders from Standby Mode.  The camera module is booted up, the camera takes a picture, stores it is RAM/ROM and then the camera is powered town again to conserve power.  After finishing these tasks it will return to Standby Mode. \\
 \noindent
-\textbf{Transmissions Mode: } This mode is entered once communications is established with the ground station.  It will relay basic telemetry and if a picture is waiting in queue it will be sent.  If the EPS detects that the power is too low it will exit Transmissions mode, and will not allow it to enter it again until it has returned to acceptable levels.\\
+\textbf{Transmissions Mode: } This mode is entered once communications is established with the ground station or if the GPS acknowledges that a ground station is in range.  It will relay basic telemetry and if a picture is waiting in queue it will be sent.  If the EPS detects that the power is too low it will exit Transmissions mode, and will not allow it to enter it again until it has returned to acceptable levels.  Similarly the transmitter can be shut down by a command by the ground station.\\
 \noindent
 \textbf{Power Critical Mode: } In the event that the power level drops to a point where Standby is not sustainable SnapSat will enter this mode.  All systems will be turned off with the exception of the EPS for the purpose of charging the batteries.  It will exit this mode when the batteries are sufficiently charged. \\
 \noindent

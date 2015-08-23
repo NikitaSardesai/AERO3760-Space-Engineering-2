@@ -66,6 +66,14 @@ and so on; where $x_i$, $y_i$ and $z_i$ are the positions of each component and 
 
 
 \subsection{Power Budget}
+
+The power to the SnapSat will be supplied by 9 solar panels arranged around the cube as shown in Figure~\ref{fig:flower}.
+
+The solar panels used are advertised at ouputting 1W.  In space, light intensity is approximately 144\% that on earth since there is no attenuation due to absorption so we can conclude that solar panel output would increase accordingly.
+Since we assume the satellite will spend 65\% of it's time in the sun $OAP = 0.65\cdot P\cdot1.44$ \\
+NIKITA CALCULATIONS HERE \\
+This gives an OAP of approximately 2.1 W, however the peak input power from the solar panels is 7.2 W (if incident light occurs from above) which the batteries are capable of charging.
+
 \vspace{-0.3cm}
 \begin{table}[H]
     \centering
@@ -76,24 +84,27 @@ and so on; where $x_i$, $y_i$ and $z_i$ are the positions of each component and 
         \begin{tabular}{|>{\arraybackslash}m{2cm}||>{\arraybackslash}m{2cm}|>{\arraybackslash}m{2cm}|>{\arraybackslash}m{1.4cm}|>{\arraybackslash}m{1.4cm}|>{\arraybackslash}m{1.4cm}|>{\arraybackslash}m{1.4cm}|>{\arraybackslash}m{1.4cm}|}
            \hline
            \multicolumn{3}{|l|}{} & \multicolumn{5}{l|}{{\bf Average Duty Cycle by Mode (\%)}} \\ \hline
-           {\bf Load} & {\bf Power Consumption (W)} & {\bf Number of Units On} & {\it Safe Mode} & {\it Recovery Mode} & {\it Payload Mode} & {\it Other Mode} &  \\ \hline\hline
-           OBC &  &  &  &  &  &  &  \\ \hline
-           VHF Rx &  &  &  &  &  &  &  \\ \hline
-           S-band Tx &  &  &  &  &  &  &  \\ \hline
-           Magnotorquers & 150mW & 1 & 0 \% & on  &  &  &  \\ \hline
-           Power Board &  &  &  &  &  &  &  \\ \hline
-           Camera & 1950mW & 1 & 0 & 0 & 100 \% &  &  \\ \hline
-           IMU & 30mW  & 1 & off & on & on & on &  \\ \hline
-           GPS & 100mW & 1 & off &  &  &  &  \\ \hline
-           Solar Panels & 935mW & 5 & on & on & on &  &  \\ \hline
+           {\bf Load} & {\bf Power Consumption (W)} & {\bf Number of Units On} & {\it Standby Mode} & {\it Detumble Mode} & {\it Payload Operations Mode} & {\it Transmissions Mode} & {\it Power Critical Mode} \\ \hline\hline
+           OBC & 55mW & 1 & 25 \% & 100\%  & 100\% & 100\% & 10\% \\ \hline
+           VHF Rx & 5mW & 1 & 100\% & 100\% & 100\% & 100\% & 0\% \\ \hline
+           S-band Tx & 500mW & 1 & 0\% & 5\% & 5\% & 100\% & 0\% \\ \hline
+           Magnotorquers & 150mW & 1 & 10 \% & 100\%  & 0\% & 0\% &  0\%\\ \hline
+           Power Board & 350mW & 1 & 100 \% & 100 \% & 100 \% & 100 \% & 100 \% \\ \hline
+           Camera & 1950mW & 1 & 0\% & 0\% & 100 \% & 0\% & 0\% \\ \hline
+           IMU & 30mW  & 1 & 25\% & 100 \% & 25\% & 25\% & 0\% \\ \hline
+           GPS & 100mW & 1 & 25\% & 0\% & 0\% & 0\% & 0\% \\ \hline
            &  &  &  &  &  &  &  \\ \hline\hline
-           \multicolumn{3}{|l|}{{\bf Sum Loads (W)}} &  &  &  &  &  \\ \hline
-           \multicolumn{3}{|l|}{{\bf Efficiency}} &  &  &  &  &  \\ \hline
-           \multicolumn{3}{|l|}{{\bf Power Consumed (W)}} &  &  &  &  &  \\ \hline
-           \multicolumn{3}{|l|}{{\bf Power Generated (W)}} &  &  &  &  &  \\ \hline
-           \multicolumn{3}{|l|}{{\bf Power Margin}} &  &  &  &  &  \\ \hline
+           \multicolumn{3}{|l|}{{\bf Sum Loads (mW)}} & 416.25 & 690 & 2467.5 & 568.5 & 355.8 \\ \hline
+           \multicolumn{3}{|l|}{{\bf Efficiency}} & 0.8 & 0.8 & 0.8 & 0.8 & 0.8 \\ \hline
+           \multicolumn{3}{|l|}{{\bf Power Consumed (mW)}} & 520.3 & 862.5 & 3084.4 & 710.6 & 444.37 \\ \hline
+           \multicolumn{3}{|l|}{{\bf Power Generated (mW)}} & 2100 & 2100 & 2100 & 2100 & 2100 \\ \hline
+           \multicolumn{3}{|l|}{{\bf Power Margin}} & 1579.7 & 1237.5 & -984.4 & 1389.4 & 1655.6 \\ \hline
         \end{tabular} } 
     \end{table} \vspace{0.3cm}
+    
+    \noindent
+    This power budget is provisional and dependent on the orbital height of the SnapSat as this will greatly increase the power consumption of the S-band Tx unit. \\
+    Further testing will be required to determine the exact distance the 500mW of power will propagate the signal.
 
 \subsection{Pointing Budget}
 
