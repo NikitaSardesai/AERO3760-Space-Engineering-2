@@ -1,35 +1,16 @@
 
 \section{System Budgets}
-This section detail the power and mass budgets of SnapSat. (overview/description)
-
 
 \subsection{Mass Budget} 
-The mass budget is shown in table~\ref{tab:massbudget}, it is ensured that \textit{SnapSat} meets the requirement of a maximum weight of 1kg. The component masses were used to determine the center of gravity for the satellite, it is desirable to keep this located close to the geometric centre as the attitude control system (magneto-torquers) are placed on the outermost surfaces.Centroid averaging across all three axes was used to calculate this as follows
-\[
-x_{cg} = \cfrac{\Sigma x_i\cdot m_i}{\Sigma m_i} \qquad y_{cg} = \cfrac{\Sigma y_i\cdot m_i}{\Sigma m_i} \qquad z_{cg} = \cfrac{\Sigma z_i\cdot m_i}{\Sigma m_i}
-\]
-\noindent
-The moment of inertia about all three axes is given by
-\[ I = \int r^2\,\,dm \]
-\noindent
-The inertial of each individual component was ignored, assuming these were roughly symmetrical. Only the relative locations of the component contributed to the total inertia. Thus, the inertias were given
-\begin{eqnarray} 
-I_{xx} &=& \cfrac{1}{\Sigma m_i}\,\cdot\,\left( \Sigma \sqrt{(y_i-y_{cg})^2+(z_i-z_{cg})^2}\,\cdot\,m_i \right) \\
-I_{yy} &=& \cfrac{1}{\Sigma m_i}\,\cdot\,\left( \Sigma \sqrt{(x_i-x_{cg})^2+(z_i-z_{cg})^2}\,\cdot\,m_i \right) \\
-I_{zz} &=& \cfrac{1}{\Sigma m_i}\,\cdot\,\left( \Sigma \sqrt{(x_i-x_{cg})^2+(y_i-y_{cg})^2}\,\cdot\,m_i \right) 
-\end{eqnarray} 
-\noindent
-and so on; where $x_i$, $y_i$ and $z_i$ are the positions of each component and $m_i$ is the mass of each component. The inertial matrix was computed using \textit{Solidworks}. It was found to be:
+The mass budget is shown in table~\ref{tab:massbudget}, detailed calculations are included in Appendix~\ref{app:mass}. it is ensured that \textit{SnapSat} meets the requirement of a maximum weight of 1kg. The inertial matrix was computed using \textit{Solidworks}. It was found to be:
 \begin{equation}
     I = \bmat{0.4cm}{I_{xx} * I_{xy} * I_{xz} @
                  I_{yx} * I_{yy} * I_{yz} @
                  I_{zx} * I_{zy} * I_{zz}} = 
-    \bmat{0.4cm}{886508.05 * 287196.55 * 245002.46 @
-                 287196.55 * 77032823 * 292616.34 @
-                 245002.46 * 292616.34 * 880334.84}\text{ g$\cdot$ mm}^2
+    \bmat{0.4cm}{297788.17 * 301.92 * 5644.56 @
+                 301.92 * 291591.41 * 3021.25 @
+                 5644.56 * 3021.25 * 296099.96}\text{ g$\cdot$ mm}^2
 \end{equation}
-\noindent
-{\it note: would be better after we put the components in}
 
 %\begin{landscape}
 \begin{table}[H]
@@ -37,7 +18,7 @@ and so on; where $x_i$, $y_i$ and $z_i$ are the positions of each component and 
     \caption{SnapSat Mass Budget (target mass of 1000 g)}
     \vspace{0.15cm}
     \label{tab:massbudget}
-    {\renewcommand{\arraystretch}{1.2}%
+    {\renewcommand{\arraystretch}{1.1}%
     \begin{tabular}{|>{\arraybackslash}m{3.5cm}||>{\arraybackslash}m{2.3cm}|>{\arraybackslash}m{2.3cm}|>{\arraybackslash}m{2.3cm}|>{\arraybackslash}m{2.3cm}|}
             \hline
             {\bf Subsystem} & {\bf Mass} & {\bf Contingency} & {\bf Mass $+$ Contingency} & {\bf Fraction of Total Mass} \\ \hline\hline
@@ -64,15 +45,15 @@ and so on; where $x_i$, $y_i$ and $z_i$ are the positions of each component and 
 %\end{figure} 
 %\end{landscape}
 
-
 \subsection{Power Budget}
 
-The power to the SnapSat will be supplied by 9 solar panels arranged around the cube as shown in Figure~\ref{fig:flower}.
-
-The solar panels used are advertised at ouputting 1W.  In space, light intensity is approximately 144\% that on earth since there is no attenuation due to absorption so we can conclude that solar panel output would increase accordingly.
-Since we assume the satellite will spend 65\% of it's time in the sun $OAP = 0.65\cdot P\cdot1.44$ \\
-NIKITA CALCULATIONS HERE \\
-This gives an OAP of approximately 2.1 W, however the peak input power from the solar panels is 7.2 W (if incident light occurs from above) which the batteries are capable of charging.
+The power to the SnapSat will be supplied by 9 solar panels arranged around the cube as shown in Figure~\ref{fig:flower}.  This design is contingent on 3D printing the SnapSat as the solar panels will have to be depressed into the framework to allow the secondaries to fold up during transport/inside the pea pod.  In the event that it is not possible to use the fold our design, only 5 solar panels will be used and the SnapSat will transmit less and take less pictures accordingly. \\
+\noindent
+We will cut solar panels to 94x94 mm to produce an output of approximately 1.5W per panel.  This output will be increase again in space due to the lack of atmosphere.\\
+Since we assume the satellite will spend 65\% of it's time in the sun $OAP = 0.65\cdot 1.5\cdot1.44$ \\ per panel assuming it is directly in the sun. 
+By observing the layout we can assume that at any given time in the orbit 2.5 solar panels are exposed at varying angles. This gives an OAP of approximately 2.1 W, however the peak input power from the solar panels is 10.8 W (if incident light occurs from above) which the batteries are capable of charging. If cutting the solar panels does not work as expected we will purchase alternate ones and deal with the diminished power supply. \\
+\noindent
+This power budget is provisional and dependent on the orbital height of the SnapSat as this will greatly increase the power consumption of the S-band Tx unit. Further testing will be required to determine the exact distance the 500mW of power will propagate the signal.
 
 \vspace{-0.3cm}
 \begin{table}[H]
@@ -80,38 +61,36 @@ This gives an OAP of approximately 2.1 W, however the peak input power from the 
     \caption{SnapSat Power Budget}
     \vspace{0.15cm}
 %    \label{tab:designoverview}
-    {\renewcommand{\arraystretch}{1.4}%
+    {\renewcommand{\arraystretch}{1.2}%
         \begin{tabular}{|>{\arraybackslash}m{2cm}||>{\arraybackslash}m{2cm}|>{\arraybackslash}m{2cm}|>{\arraybackslash}m{1.4cm}|>{\arraybackslash}m{1.4cm}|>{\arraybackslash}m{1.4cm}|>{\arraybackslash}m{1.4cm}|>{\arraybackslash}m{1.4cm}|}
            \hline
            \multicolumn{3}{|l|}{} & \multicolumn{5}{l|}{{\bf Average Duty Cycle by Mode (\%)}} \\ \hline
-           {\bf Load} & {\bf Power Consumption (W)} & {\bf Number of Units On} & {\it Standby Mode} & {\it Detumble Mode} & {\it Payload Operations Mode} & {\it Transmissions Mode} & {\it Power Critical Mode} \\ \hline\hline
-           OBC & 55mW & 1 & 25 \% & 100\%  & 100\% & 100\% & 10\% \\ \hline
-           VHF Rx & 5mW & 1 & 100\% & 100\% & 100\% & 100\% & 0\% \\ \hline
-           S-band Tx & 500mW & 1 & 0\% & 5\% & 5\% & 100\% & 0\% \\ \hline
-           Magnotorquers & 150mW & 1 & 10 \% & 100\%  & 0\% & 0\% &  0\%\\ \hline
-           Power Board & 350mW & 1 & 100 \% & 100 \% & 100 \% & 100 \% & 100 \% \\ \hline
-           Camera & 1950mW & 1 & 0\% & 0\% & 100 \% & 0\% & 0\% \\ \hline
-           IMU & 30mW  & 1 & 25\% & 100 \% & 25\% & 25\% & 0\% \\ \hline
-           GPS & 100mW & 1 & 25\% & 0\% & 0\% & 0\% & 0\% \\ \hline
-           &  &  &  &  &  &  &  \\ \hline\hline
-           \multicolumn{3}{|l|}{{\bf Sum Loads (mW)}} & 416.25 & 690 & 2467.5 & 568.5 & 355.8 \\ \hline
+           {\bf Load} & {\bf Power Consumption (mW)} & {\bf Number of Units On} & {\it Standby Mode} & {\it Detumble Mode} & {\it Payload Operations Mode} & {\it Transmissions Mode} & {\it Power Critical Mode} \\ \hline\hline
+           OBC & 55 & 1 & 25 \% & 100\%  & 100\% & 100\% & 10\% \\ \hline
+           VHF Rx & 5 & 1 & 100\% & 100\% & 100\% & 100\% & 0\% \\ \hline
+           S-band Tx & 500& 1 & 0\% & 5\% & 5\% & 100\% & 0\% \\ \hline
+           Magnotorquers & 150 & 1 & 10 \% & 100\%  & 0\% & 0\% &  0\%\\ \hline
+           Current Sensors & 140 & 1 & 100 \% & 100 \% & 100 \% & 100 \% & 100 \% \\ \hline
+           Power Board & 140 & 1 & 100 \% & 100 \% & 100 \% & 100 \% & 100 \% \\ \hline
+           Camera & 250 & 1 & 0\% & 0\% & 100 \% & 0\% & 0\% \\ \hline
+           IMU & 30  & 1 & 25\% & 100 \% & 25\% & 25\% & 0\% \\ \hline
+           Photodiodes & 120  & 1 & 25\% & 100 \% & 25\% & 25\% & 0\% \\ \hline
+           GPS & 66 & 1 & 25\% & 0\% & 0\% & 0\% & 0\% \\ \hline
+           \multicolumn{3}{|l|}{{\bf Sum Loads (mW)}} & 368 & 665 & 653 & 515 & 286  \\ \hline
            \multicolumn{3}{|l|}{{\bf Efficiency}} & 0.8 & 0.8 & 0.8 & 0.8 & 0.8 \\ \hline
-           \multicolumn{3}{|l|}{{\bf Power Consumed (mW)}} & 520.3 & 862.5 & 3084.4 & 710.6 & 444.37 \\ \hline
+           \multicolumn{3}{|l|}{{\bf Power Consumed (mW)}} & 450 & 831 & 816 & 644 & 357 \\ \hline
            \multicolumn{3}{|l|}{{\bf Power Generated (mW)}} & 2100 & 2100 & 2100 & 2100 & 2100 \\ \hline
-           \multicolumn{3}{|l|}{{\bf Power Margin}} & 1579.7 & 1237.5 & -984.4 & 1389.4 & 1655.6 \\ \hline
+           \multicolumn{3}{|l|}{{\bf Power Margin}} & 1640 & 1269 & 1284 & 1456 & 1743 \\ \hline
         \end{tabular} } 
     \end{table} \vspace{0.3cm}
     
-    \noindent
-    This power budget is provisional and dependent on the orbital height of the SnapSat as this will greatly increase the power consumption of the S-band Tx unit. \\
-    Further testing will be required to determine the exact distance the 500mW of power will propagate the signal.
 
 \subsection{Pointing Budget}
 
 Since this spacecraft is performing Earth observation, it requires a pointing budget. This refers to the ability to orient the spacecraft towards a target having a specific geographical orientation. Along with the pointing accuracy, the satellite needs to be able to map the location from its own location. Errors in both pointing and mapping accuracies will be discussed here. \\
-\\\noindent
+\noindent
 The attitude control system for SnapSat will consist of three air core magnetorquers operating on 3 separate planes capable of producing 0.05Am$^2$ each.  Only two of the magnetorquers can work at any one time, which will reduce total power usage for the system.  The first component of the determination system is a 9-DOF IMU which will primarily be used in the de-tumble phase due to accumulated error issues with this equipment which are expected to occur later in the mission.  The second component is a solar tracker system consisting of six photodiode pins, one on each face, which will be used to accurately determine the attitude of the satellite based on the location of the Sun. \\
-\\\noindent
+\noindent
 According to the specification data, the IMU will experience a 2\% error based on the expected temperature range, although this will increase over the course of the mission due to the accumulated error.  Although the exact error will need to be calculated during calibration and testing, based on current literature there are a number of similar solar tracking systems which are able to achieve an accuracy of 0.2\% \cite{beaudette}.  However given the low budget and subsequently slightly inferior equipment conservative estimate of 0.5\% will be used for the solar tracker error.  In regards to the magnetorquers expected error based on similar models 1\%, although error will be finalised during the calibration and testing phase.
 \subsubsection{Error Calculation}
 Due to the fact that the two attitude determination systems will almost always be used separately we have calculated three different total errors. The total errors were calculated using the following formula:
@@ -127,7 +106,7 @@ This is summarised in the table below
     \centering
     \caption{Pointing budget error calculation breakdown}
     \vspace{0.1cm}
-    {\renewcommand{\arraystretch}{1.4}%
+    {\renewcommand{\arraystretch}{1.1}%
         \begin{tabular}{|>{\centering\arraybackslash}m{2.3cm}|>{\centering\arraybackslash}m{2.3cm}|>{\centering\arraybackslash}m{2.3cm}|>{\centering\arraybackslash}m{2.5cm}|>{\centering\arraybackslash}m{2cm}|>{\centering\arraybackslash}m{2cm}|}
             \hline
             & {\bf IMU Error (\%)} & {\bf Sun Tracker Error (\%)} & {\bf Magnetorquer Error (\%)} & {\bf Total (\%)} & {\bf Total (\deg)} \\ \hline\hline
@@ -145,27 +124,111 @@ The majority of the mission is expected to be spent using system 2 (utilising th
 
 
 \subsection{Link Budgets}
-Calculations for both link budgets (list assumptions here).
+
+
 
 \subsubsection{Uplink Budget}
-The uplink budget allows for XXX. The specifications are
-\begin{itemize}
-    \item Antenna type at satellite: (omni, directional$+$gain)
-    \item Frequency Band: (VHF (145.800MHz) , UHF (435.xxx MHz), SHF etc.)
-    \item Objective C/N:
-    \item Bit rate and modulation type:
-    \item Expected occupied bandwidth:
-\end{itemize}
+The results of the uplink budget (table~\ref{tab:uplink}) can be seen in the table below, where it satisfies the requirements for a successful link. The ground station utilises a cross yogi antenna for transmission into space while the satellite receives this by utilising a dipole antenna manufactured from measuring tape. The frequency band that is used for uplink is in the UHF band at 315 MHz. A low power transceiver chip was found that could receive at this frequency and also transmit at a higher frequency so the system is being based on this. This also allows the antennas to be cut to a manageable size giving less chance for a mechanical failure. The modulation utilised is Audio Frequency Shift Keying, over the audio tones of 1200Hz and 2200 Hz. With this we will be using a baud rate of 1200. AFSK is not the most efficient but it is simple and allows for less chance of failure. The expected bandwidth will fit in 20kHz at -30 dBc.
 
 \subsubsection{Downlink Budget}
-The downlink budget allows for XXX. The specifications are
-\begin{itemize}
-    \item Antenna type at satellite: (omni, directional$+$gain)
-    \item Frequency Band: (VHF (145.800MHz) , UHF (435.xxx MHz), SHF etc.)
-    \item Objective C/N:
-    \item Bit rate and modulation type:
-    \item Expected occupied bandwidth:
-\end{itemize}
+See table~\ref{tab:downlink} for the budget. As stated above the satellite will be using a dipole antenna for transmission whilst the signal will be received by a high gain antenna at the ground station.
+The frequency band being utilised for downlink will be in the UHF spectrum at 433MHz, due to the data rate available and the compatibility with the chosen transceiver chip. The modulation used is Binary Phase Shift Keying, which works by modulating the phase of the reference signal. With this we will be using a baud rate of 9600 and the expected bandwidth will also fit into a 20kHz range at -30 dBc.
+
+\begin{table}[H]
+    \centering
+    \caption{Uplink Budget}
+    \vspace{0.2cm}
+    \label{tab:uplink}
+    {\renewcommand{\arraystretch}{1.2}%
+        \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{2cm}|>{\centering\arraybackslash}m{3cm}|>{\centering\arraybackslash}m{2cm}}      
+            \multicolumn{4}{l}{{\bf Information on the System}} \\
+            \multicolumn{2}{l}{{\bf Transmitter: Ground Station}} & \multicolumn{2}{l}{{\bf Receiver: SnapSat}} \\
+            \multicolumn{2}{l}{Orbit Altitude: 350km} & \multicolumn{2}{l}{Elevation: 30 degrees} \\
+            \multicolumn{2}{l}{Slant Range: 652.5km} & \multicolumn{2}{l}{Weather: Clear Sky} \\
+            \multicolumn{2}{l}{Demodulation Method: AFSK} & \multicolumn{2}{l}{Cable Length: 20m} \\
+            \multicolumn{2}{l}{Antenna Type (TX): Cross Yagi} & \multicolumn{2}{l}{Antenna Type: Dipole} \\
+            \multicolumn{4}{l}{{\bf Transmitter System (Ground Station)}} \\
+            \multicolumn{2}{l}{\multirow{2}{*}{Ground Station Transmitter Power Output}} & \multicolumn{2}{l}{100 W} \\
+            \multicolumn{2}{l}{} & \multicolumn{2}{l}{20 dBW} \\
+            \multicolumn{2}{l}{Ground Station Total Transmission Line,Losses} & \multicolumn{2}{l}{3.4 dB} \\
+            \multicolumn{2}{l}{Ground Station Antenna Gain} & \multicolumn{2}{l}{18.9 dBi} \\
+            \multicolumn{2}{l}{Ground Station ERIP} & \multicolumn{2}{l}{35.5 dBW} \\
+            \multicolumn{4}{l}{{\bf Down Link Path}} \\
+            \multicolumn{2}{l}{Free-Space Path Loss} & \multicolumn{2}{l}{132 dB} \\
+            \multicolumn{2}{l}{Satellite Antenna Pointing Loss (10 °)} & \multicolumn{2}{l}{10.6 dB} \\
+            \multicolumn{2}{l}{Ground Station Antenna Pointing Loss (10°)} & \multicolumn{2}{l}{2.7 dB} \\
+            \multicolumn{2}{l}{Satellite Transmission Line Losses} & \multicolumn{2}{l}{0.5 dB} \\
+            \multicolumn{2}{l}{Atmospheric Loss (30°)} & \multicolumn{2}{l}{0.4 dB} \\
+            \multicolumn{2}{l}{Ionspheric Loss} & \multicolumn{2}{l}{0.4 dB} \\
+            \multicolumn{2}{l}{Rain Loss} & \multicolumn{2}{l}{0 dB} \\
+            \multicolumn{2}{l}{Total Loss} & \multicolumn{2}{l}{146.6 dB} \\
+            \multicolumn{4}{l}{{\bf Receiver System (on SnapSat)}} \\
+            \multicolumn{2}{l}{Antenna Gain} & \multicolumn{2}{l}{2.7 dBi} \\
+            \multicolumn{2}{l}{Effective Noise Temperature at Space (350K/Day)} & \multicolumn{2}{l}{1345K} \\
+            \multicolumn{2}{l}{Figure of Merrit (G/Ta)} & \multicolumn{2}{l}{-28.6 dB/K} \\
+            \multicolumn{2}{l}{Carrier to Thermal Noise Ratio (C/T)} & \multicolumn{2}{l}{-136.6 dB} \\
+            \multicolumn{2}{l}{Boltzmann's constant (K)} & \multicolumn{2}{l}{-228 dBW/K/Hz} \\
+            \multicolumn{2}{l}{Carrier to Noise Density Ratio (C/No)} & \multicolumn{2}{l}{88.9dBHz} \\
+            \multicolumn{4}{l}{{\bf Modulation Process}} \\
+            \multicolumn{2}{l}{System Desired Data Rate} & \multicolumn{2}{l}{1200 bps} \\
+            \multicolumn{2}{l}{Demodulation Method Selected} & \multicolumn{2}{l}{AFSK} \\
+            \multicolumn{2}{l}{System Allowed or Specified Bit-Error Rate} & \multicolumn{2}{l}{1.00E-04} \\
+            \multicolumn{2}{l}{Demodulator Implementation Loss} & \multicolumn{2}{l}{2 dB} \\
+            \multicolumn{4}{l}{{\bf Link Performance}} \\
+            \multicolumn{2}{l}{Required Eb/No} & \multicolumn{2}{l}{56.1 dB} \\
+            \multicolumn{2}{l}{Threshold Eb/No} & \multicolumn{2}{l}{23.2 dB} \\
+            \multicolumn{2}{l}{{\bf System Link Margin}} & \multicolumn{2}{l}{{\bf 32.9 dB}}
+        \end{tabular} } 
+    \end{table}
+
+
+
+\begin{table}[H]
+    \centering
+    \caption{Downlink Budget}
+    \vspace{0.2cm}
+    \label{tab:downlink}
+    {\renewcommand{\arraystretch}{1.2}%
+        \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{2cm}|>{\centering\arraybackslash}m{3cm}|>{\centering\arraybackslash}m{2cm}}      
+\multicolumn{4}{l}{{\bf Information on the System}} \\
+\multicolumn{2}{l}{{\bf Transmitter - SnapSat}} & \multicolumn{2}{l}{{\bf Receiver - Ground Station}} \\
+\multicolumn{2}{l}{Orbit Altitude – 350km} & \multicolumn{2}{l}{Elevation – 30 degrees} \\
+\multicolumn{2}{l}{Slant Range – 652.5km} & \multicolumn{2}{l}{Weather – Clear Sky} \\
+\multicolumn{2}{l}{Demodulation Method – BPSK} & \multicolumn{2}{l}{Cable Length – 20m} \\
+\multicolumn{2}{l}{Antenna Type (TX) –  Dipole} & \multicolumn{2}{l}{Antenna Type – Cross Yagi} \\
+\multicolumn{4}{l}{{\bf Transmitter System (SnapSat)}} \\
+\multicolumn{2}{l}{\multirow{2}{*}{Satellite Transmitter Power Output}} & \multicolumn{2}{l}{0.5 W} \\
+\multicolumn{2}{l}{} & \multicolumn{2}{l}{-3.01 dBW} \\
+\multicolumn{2}{l}{Satellite Total Transmission Line Losses} & \multicolumn{2}{l}{0.5 dB} \\
+\multicolumn{2}{l}{Satellite Antenna Gain} & \multicolumn{2}{l}{2.7dBi} \\
+\multicolumn{2}{l}{Satellite ERIP} & \multicolumn{2}{l}{-0.81 dBW} \\
+\multicolumn{4}{l}{{\bf Down Link Path}} \\
+\multicolumn{2}{l}{Free-Space Path Loss} & \multicolumn{2}{l}{132 dB} \\
+\multicolumn{2}{l}{Satellite Antenna Pointing Loss (10 °)} & \multicolumn{2}{l}{10.6 dB} \\
+\multicolumn{2}{l}{Ground Station Antenna Pointing Loss (10°)} & \multicolumn{2}{l}{2.7 dB} \\
+\multicolumn{2}{l}{Ground Station Transmission Line Losses} & \multicolumn{2}{l}{1.8 dB} \\
+\multicolumn{2}{l}{Atmospheric Loss (30°)} & \multicolumn{2}{l}{0.4 dB} \\
+\multicolumn{2}{l}{Ionspheric Loss} & \multicolumn{2}{l}{0.8 dB} \\
+\multicolumn{2}{l}{Rain Loss} & \multicolumn{2}{l}{0 dB} \\
+\multicolumn{2}{l}{Total Loss} & \multicolumn{2}{l}{146.4 dB} \\
+\multicolumn{4}{l}{{\bf Receiver System (Ground Station)}} \\
+\multicolumn{2}{l}{Antenna Gain} & \multicolumn{2}{l}{14.4 dBi} \\
+\multicolumn{2}{l}{Effective Noise Temperature at Sydney (350K/Day)} & \multicolumn{2}{l}{610.1 K} \\
+\multicolumn{2}{l}{Figure of Merrit (G/Ta)} & \multicolumn{2}{l}{13.5 dB/K} \\
+\multicolumn{2}{l}{Carrier to Thermal Noise Ratio (C/T)} & \multicolumn{2}{l}{-160.71 dB} \\
+\multicolumn{2}{l}{Boltzmann's constant (K)} & \multicolumn{2}{l}{-228.6 dBW/K/Hz} \\
+\multicolumn{2}{l}{Carrier to Noise Density Ratio (C/No)} & \multicolumn{2}{l}{67.89 dBHz} \\
+\multicolumn{4}{l}{{\bf Modulation Process}} \\
+\multicolumn{2}{l}{System Desired Data Rate} & \multicolumn{2}{l}{9600 bps} \\
+\multicolumn{2}{l}{Demodulation Method Selected} & \multicolumn{2}{l}{BPSK} \\
+\multicolumn{2}{l}{System Allowed or Specified Bit-Error Rate} & \multicolumn{2}{l}{1.00E-04} \\
+\multicolumn{2}{l}{Demodulator Implementation Loss} & \multicolumn{2}{l}{2 dB} \\
+\multicolumn{4}{l}{{\bf Link Performance}} \\
+\multicolumn{2}{l}{Required Eb/No} & \multicolumn{2}{l}{26.07 dB} \\
+\multicolumn{2}{l}{Threshold Eb/No} & \multicolumn{2}{l}{10.5 dB} \\
+\multicolumn{2}{l}{{\bf System Link Margin}} & \multicolumn{2}{l}{{\bf 15.56 dB}}
+      \end{tabular} } 
+    \end{table}
 
 \subsection{Data Budget}
 Data budget CALCULATIONS.

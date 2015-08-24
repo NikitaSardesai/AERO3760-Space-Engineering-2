@@ -1,5 +1,23 @@
 \section{Appendix: Supplementary Calculations}
 
+\subsection{Mass Budget Calculations} \label{app:mass}
+The component masses were used to determine the center of gravity for the satellite, it is desirable to keep this located close to the geometric centre as the attitude control system (magneto-torquers) are placed on the outermost surfaces.Centroid averaging across all three axes was used to calculate this as follows
+\[
+x_{cg} = \cfrac{\Sigma x_i\cdot m_i}{\Sigma m_i} \qquad y_{cg} = \cfrac{\Sigma y_i\cdot m_i}{\Sigma m_i} \qquad z_{cg} = \cfrac{\Sigma z_i\cdot m_i}{\Sigma m_i}
+\]
+\noindent
+The moment of inertia about all three axes is given by
+\[ I = \int r^2\,\,dm \]
+\noindent
+The inertial of each individual component was ignored, assuming these were roughly symmetrical. Only the relative locations of the component contributed to the total inertia. Thus, the inertias were given
+\begin{eqnarray} 
+    I_{xx} &=& \cfrac{1}{\Sigma m_i}\,\cdot\,\left( \Sigma \sqrt{(y_i-y_{cg})^2+(z_i-z_{cg})^2}\,\cdot\,m_i \right) \\
+    I_{yy} &=& \cfrac{1}{\Sigma m_i}\,\cdot\,\left( \Sigma \sqrt{(x_i-x_{cg})^2+(z_i-z_{cg})^2}\,\cdot\,m_i \right) \\
+    I_{zz} &=& \cfrac{1}{\Sigma m_i}\,\cdot\,\left( \Sigma \sqrt{(x_i-x_{cg})^2+(y_i-y_{cg})^2}\,\cdot\,m_i \right) 
+    \end{eqnarray} 
+    \noindent
+    and so on; where $x_i$, $y_i$ and $z_i$ are the positions of each component and $m_i$ is the mass of each component. 
+
 \subsection{Mapping Calculation Considerations} \label{app:mapping}
 Calculations are based on an orbit of 300km altitude. In general if we are targeting cities, metropolitan areas for a number of major cities are approximately 100 km$^2$.  Thus assume a target size of 10km by 10km.  For an orbit path that goes directly over the city:
 \[
