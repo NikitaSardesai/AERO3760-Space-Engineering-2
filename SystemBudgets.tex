@@ -231,6 +231,8 @@ The frequency band being utilised for downlink will be in the UHF spectrum at 43
     \end{table}
 
 \subsection{Data Budget}
-Data budget CALCULATIONS.
+The amount of data that can be transferred between the satellite and ground station is one of the major restrictions that cannot be overlooked. The low power and size of the device coupled with the large distance the data has to travel results in a small data rate. Our satellite collects information about it's position and it's surroundings  but these occupy only a small portion of the data sent back to earth. The payload is a camera which compressed JPEGs of the size 640*480. These files can range from around 20 kB up to 300 kB. Our camera will be taking photos of earth and space so the files will likely be closer to the lower end of the spectrum. \\
+\\ \noindent
+Although the baud rate is 9600 this is not the total amount of information we can send. We are encoding the data with the protocol AX.25 and this has about 8\% overhead. Working this through gives us 8,832 bits to use. This equates to roughly 1.08 kB/s that can be downloaded once the link has been established. After working through the link budgets and determining we would have a communication window of roughly 10 minutes, this equates to roughly 640 kBs every fly over. With a conservative estimation on the size of the pictures and factoring the system information that is included, roughly 4 pictures will be able to be downloaded per orbit.
 
 
