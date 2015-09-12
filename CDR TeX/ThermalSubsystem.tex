@@ -1,0 +1,17 @@
+\section{Thermal Control Subsystem}
+The method of developing thermal control used for SnapSat considers the following simplified model of the satellite. The main body is idealised as a system dissipating heat (located at the centre of the CubeSat) to the boundary located on the face of the CubeSat. This boundary is exposed to the outer environment. Energy conservation laws require that in steady state, the heat dissipated by the internal electronics is equal to that transferred tot he boundary. Thus, the heat from internal dissipation added to the heat adsorbed from the outside is equal to the heat rejected to space. The general governin equation is
+\[ Q_{1\rightarrow2} = K_{1\rightarrow2}(T_a - T_2) \]
+\noindent
+\begin{align}
+    \text{Where}\quad Q &= \text{heat exchange (Watts)} \nonumber\\
+    K &= \text{proportionality factor constant (Watts/Kelvin)} \nonumber\\
+    T &= \text{temperature of bodies (Kelvin)} \nonumber
+\end{align}
+\noindent
+between bodies 1 and 2. Additionally, the heat radiated from a surface of temperature $T$ is given by 
+\[ Q_r = KT^4 \]
+\noindent
+Where the proportionality factor depends on physical constants, the material properties, surface conditions and geometry. A schematic of the incominng thermal radiation on the CubeSat in Low-Earth Orbit (LEO) is shown below.
+\begin{figure}[H]
+    \pic{0.8}{./figures/thermaloverview}{Incoming thermal radiation on the satellite}
+\end{figure}
