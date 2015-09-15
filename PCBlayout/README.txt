@@ -1,0 +1,1 @@
+A rough layout of the pcbs physical location within the structure
