@@ -30,10 +30,10 @@ The total radiation incoming onto the satellite as it orbits is defined in figur
     \label{plot:incomingradiation}
 \end{figure}
 \noindent
-Whilst this is the incoming radiation on the satellite as a whole, it is not indicative of the amount of radiation received by each side of the satellite. As the spacecraft is attitude controlled, the lower side will be facing the Earth always and never receive direct solar radiation. Corrections are found using the view factor of each side of the satellite.
+Whilst this is the incoming radiation on the satellite as a whole, it is not indicative of the amount of radiation received by each side of the satellite. As the spacecraft is attitude controlled, the lower side will be facing the Earth always and only receive solar radiation for a short period of time. The amount of solar radiation (and even Earth IR radiation) received depends on the projected area that the radiation falls upon. Corrections are found using the view factor of each side of the satellite.
 
 \subsubsection{View Factors}
-The view factor of each side of the satellite allows for the calculation of the effect of the incoming radiation. The calculation takes into account the projected amount of heat flux on each side.
+The view factor of each side of the satellite allows for the calculation of the effect of the incoming radiation. The calculation takes into account the projected amount of heat flux on each side. The calculation takes into account the projected 
 
 \begin{figure}[H]
     \pic{0.55}{./figures/orbit.png}{arg3}
@@ -67,6 +67,10 @@ Perhaps the most complex form of heat transfer is radiation, where all bodies ab
 measured in Watts/m$^2$. This is the same as equation~\ref{eqn:Qradiation}, where $\sigma$ is the Stefan-Boltzmann constant. In this case, the emissivity $\epsilon$ has been added to account for the fact that the surfaces are not perfect black bodies.
 
 \begin{figure}[H]
-    \tikzpic{0.8}{0.3}{./figures/PanelIrradiation.tex}{Solar radiation falling on each panel}
+    \tikzpic{0.8}{0.3}{./figures/PanelIncoming3.tex}{Solar radiation falling on each panel}
+\end{figure}
+
+\begin{figure}[H]
+    \tikzpic{0.8}{0.3}{./figures/IncomingPanel2.tex}{Total radiation falling upon panel 2}
 \end{figure}
 
