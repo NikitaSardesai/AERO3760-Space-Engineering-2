@@ -1,4 +1,4 @@
-#include <ARMtimer.h>
+#include <DueTimer-master.h>
 
 // With the arduino DUE we can use hardware interrupts with any of the pins
 // There are 3 timing modules and 3 chanels each giving a total of 9 timer interrupts we could use
