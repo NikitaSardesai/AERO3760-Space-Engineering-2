@@ -1,4 +1,11 @@
 #include <DueTimer-master.h>
+//IMU HEADERS
+#include <Wire.h>
+#include <Adafruit_Sensor.h>
+#include <Adafruit_LSM303_U.h>
+#include <Adafruit_L3GD20_U.h>
+#include <Adafruit_9DOF.h>
+
 
 // With the arduino DUE we can use hardware interrupts with any of the pins
 // There are 3 timing modules and 3 chanels each giving a total of 9 timer interrupts we could use
@@ -31,7 +38,7 @@ void setup()
   // 2  : frequency (in Hz)
   // myTimedPrint : function pointer to the function you want executed (we probably wont need this)
 
-  startTimer(TC1, 0, TC3_IRQn, 2, myTimedPrint); // this is setting up the 4th timer to be called twice every second
+  startTimer(TC1, 0, TC3_IRQn, 2, myTimedPrint); // this is setting up the 3th timer to be called twice every second
 
   // Paramters table:
   // TC0, 0, TC0_IRQn
@@ -45,7 +52,9 @@ void setup()
   // TC2, 2, TC8_IRQn
   
   //Set pulse on a different timer
-  startTimer(TC2, 0, TC6_IRQn, 5000, myTimedPulse); // this is setting up the 7th timer at 5000 Hz
+  startTimer(TC2, 0, TC6_IRQn, 5000, myTimedPulse); // this is setting up the 6th timer at 5000 Hz
+  
+  imuSetup(); //setup imu
 }
 
 void loop() 
@@ -68,4 +77,34 @@ void ISR_name(){
 
 }
 
+volatile void imuData()
+{
+  //intake imu data
+  sensors_event_t event; 
+  gyro.getEvent(&event);
+  //Option 1
+  //Save to global variable, data log
+  //Later have the SD card take the data and store it
+  
+  //Option 2 - Store straight to SD card
+  //problem - need to make sure it's not interrupting another store on the sd card/it can be added to the queue.
+}
+void imuSetup(){
+  //Setup automatic IMU data collect
+  startTimer(TC2, 1, TC7_IRQn, 5000, imuData); // this is setting up the 7th timer at 5000 Hz
+  //IMU Setup
+  Serial.begin(9600); //enable debugging, sending data back to computer
+  Serial.println("Gyroscope Test"); Serial.println("");
+  
+  /* Enable auto-ranging */
+  gyro.enableAutoRange(true);
+  
+  /* Initialise the sensor */
+  if(!gyro.begin())
+  {
+    /* There was a problem detecting the L3GD20 ... check your connections */
+    Serial.println("Ooops, no L3GD20 detected ... error!");
+    while(1); //hang code
+  }
+}
 
