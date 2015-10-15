@@ -15,14 +15,15 @@
 #include <Adafruit_LSM303_U.h>
 #include <Adafruit_L3GD20_U.h>
 #include <Adafruit_9DOF.h>
+#include <math.h>
 
 /* Assign a unique ID to the sensors */
 Adafruit_L3GD20_Unified gyro = Adafruit_L3GD20_Unified(20);
 
 //Global integers
-int loc_fin; //integer containing the final location
-int loc_cur; //integer containing the current location
-int * loc; //make pointer
+float loc_fin; //integer containing the final location
+float loc_cur; //integer containing the current location
+float * loc; //make pointer
 
 void setup(void){  
   //IMU Setup
@@ -39,6 +40,15 @@ void setup(void){
     Serial.println("Ooops, no L3GD20 detected ... error!");
     while(1); //hang code
   }
+  
+  //Magnetometer setup
+  //state pin directions
+  for (int i = 2; i<7;i++){    
+    pinMode(i, OUTPUT);
+  }
+  pinMode(39, OUTPUT);
+  pinMode(41, OUTPUT);
+  pinMode(43, OUTPUT);
 }
 
 void loop(void){
@@ -55,12 +65,12 @@ void loop(void){
   delay(300);
 }
 
-void checkcomms (int * loc){
+void checkcomms (float * loc){
   int a = 1; //dummy variable to make the code compile
   *loc = a; //location from comms
 }
 
-void readimu(int * loc){
+void readimu(float * loc){
   /* Get a new sensor event */ 
   sensors_event_t event; 
   gyro.getEvent(&event);
@@ -71,17 +81,57 @@ void readimu(int * loc){
   Serial.print("Z: "); Serial.print(event.gyro.z); Serial.print("  ");
   Serial.println("rad/s ");
   //transform x,y,z data into a heading
-  int a = 5;
-  int heading = a; //data from previous program
+  float heading = atan2(event.gyro.y,event.gyro.x); //gives heading in radians
   *loc = heading; //heading from the IMU
   
   //can also get rotation rate if you need
 }
 
-void changemag(int diff){
+void changemag(float diff){
   //nothing code
-  int a = 0;
-  diff = a;
+  //take in a change of heading in radians and move to get to that position
+  //if minus rotate clockwise and if plus rotate anticlockwise
+  //as a rule try to use the magnotorquer most aligned with where you need to go to make the move less violent
+  if (diff > 0){
+    //rotate clockwise
+  }
+  else if (diff < 0){
+    //rotate anticlockwise
+  }
+  //How to use Magnotorquers 
+  
+  //enable neccesary h bridge
+  //turn turn appropriate signals on/off for forwards/backwards
+  //can check this on eagle schematics
+  
+  //eg.
+  
+  //Mag 1
+  //pin43 enable
+  digitalWrite(43, HIGH);
+  //pin2 and 3 control direction
+  analogWrite(2, 0); //ground
+  analogWrite(3, 100); //input at about 50% duty cycle
+  //can swap them around to change directions
+  
+  //Mag 2
+  //pin41 enable
+    //pin43 enable
+  digitalWrite(41, HIGH);
+  //pin2 and 3 control direction
+  analogWrite(4, 0); //ground
+  analogWrite(5, 100); //input at about 50% duty cycle
+  //can swap them around to change directions
+  
+  //Mag 3 
+    //pin43 enable
+  digitalWrite(43, HIGH);
+  //pin2 and 3 control direction
+  analogWrite(6, 0); //ground
+  analogWrite(7, 100); //input at about 50% duty cycle
+  //can swap them around to change directions
+  //pin8 enable
+  //pin 6 and 7 control direction
 }
 
 
