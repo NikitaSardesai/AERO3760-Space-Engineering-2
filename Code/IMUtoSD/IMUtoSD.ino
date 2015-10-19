@@ -1,27 +1,27 @@
 /*
-  SD card datalogger
- 
- This example shows how to log data from three analog sensors 
- to an SD card using the SD library.
+ IMU to SD logger
  	
  The circuit:
+ SD
  * analog sensors on analog ins 0, 1, and 2
  * SD card attached to SPI bus as follows:
  ** MOSI - pin 11
  ** MISO - pin 12
  ** CLK - pin 13
- ** CS - pin 4
+ ** CS - pin 10
  
- created  24 Nov 2010
- modified 9 Apr 2012
- by Tom Igoe
+ IMU
+ SCL - pin A5
+ SDA - pin A4
  
- This example code is in the public domain.
+ created  19 Oct 2015
+ by Penelope Player
  	 
  */
 
 #include <SD.h>
 #include <SPI.h>
+#include <Time.h>
 
 // On the Ethernet Shield, CS is pin 4. Note that even if it's not
 // used as the CS pin, the hardware CS pin (10 on most Arduino boards,
@@ -55,12 +55,14 @@ Adafruit_LSM303_Mag_Unified mag = Adafruit_LSM303_Mag_Unified(30302);
 
 //GLOBAL VARS
 // make a string for assembling the data to log:
+//can write to this string from any function (if for example we need to use it to log GPS data)
 String dataString = "";
 
 void setup()
 {
-  // Open serial communications and wait for port to open:
+  // Open serial communications with computer for debugging purposes
   Serial.begin(9600);
+  // Setup programs for each individual component go here
   sdcardsetup();
   imusetup();
 }
@@ -68,6 +70,7 @@ void setup()
 void loop()
 {
   delay(2000);
+  //log IMU data
   imulog();
 }
 
@@ -124,8 +127,17 @@ void imulog(void){
   accel.getEvent(&accel_event);
   mag.getEvent(&mag_event);
   
+  time_t t = now();
   // append to the string
-  dataString = String(accel_event.acceleration.x);
+  dataString = String(day(t));
+  dataString += ",";
+  dataString += String(hour(t));
+  dataString += ",";
+  dataString += String(minute(t));
+  dataString += ",";
+  dataString += String(second(t));
+  dataString += ",";
+  dataString += String(accel_event.acceleration.x);
   dataString += ",";
   dataString += String(accel_event.acceleration.y);
   dataString += ",";
@@ -146,8 +158,6 @@ void imulog(void){
   // if the file isn't open, pop up an error:
   else {
     Serial.println("error opening datalog.txt");
-  } 
+  }
+  
 }
-
-
-
