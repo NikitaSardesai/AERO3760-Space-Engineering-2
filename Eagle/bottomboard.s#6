@@ -519,6 +519,68 @@
 </deviceset>
 </devicesets>
 </library>
+<library name="sdcard">
+<packages>
+<package name="SDCARD">
+<wire x1="0" y1="0" x2="31.75" y2="0" width="0.127" layer="21"/>
+<wire x1="31.75" y1="0" x2="31.75" y2="25.4" width="0.127" layer="21"/>
+<wire x1="31.75" y1="25.4" x2="0" y2="25.4" width="0.127" layer="21"/>
+<wire x1="0" y1="25.4" x2="0" y2="0" width="0.127" layer="21"/>
+<pad name="CD" x="30.48" y="21.59" drill="0.8" shape="square"/>
+<pad name="CS" x="30.48" y="19.05" drill="0.8" shape="square"/>
+<pad name="DI" x="30.48" y="16.51" drill="0.8" shape="square"/>
+<pad name="DO" x="30.48" y="13.97" drill="0.8" shape="square"/>
+<pad name="CLK" x="30.48" y="11.43" drill="0.8" shape="square"/>
+<pad name="GND" x="30.48" y="8.89" drill="0.8" shape="square"/>
+<pad name="3V" x="30.48" y="6.35" drill="0.8" shape="square"/>
+<pad name="5V" x="30.48" y="3.81" drill="0.8" shape="square"/>
+<hole x="2.54" y="22.86" drill="2.448559375"/>
+<hole x="2.54" y="2.54" drill="2.46"/>
+<hole x="22.86" y="2.54" drill="2.448559375"/>
+<hole x="22.86" y="22.86" drill="2.448559375"/>
+</package>
+</packages>
+<symbols>
+<symbol name="SDCARD">
+<wire x1="-27.94" y1="12.7" x2="5.08" y2="12.7" width="0.254" layer="94"/>
+<wire x1="5.08" y1="12.7" x2="5.08" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="5.08" y1="-10.16" x2="-27.94" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="-27.94" y1="-10.16" x2="-27.94" y2="12.7" width="0.254" layer="94"/>
+<pin name="CD" x="10.16" y="10.16" length="middle" rot="R180"/>
+<pin name="CS" x="10.16" y="7.62" length="middle" rot="R180"/>
+<pin name="DI" x="10.16" y="5.08" length="middle" rot="R180"/>
+<pin name="DO" x="10.16" y="2.54" length="middle" rot="R180"/>
+<pin name="CLK" x="10.16" y="0" length="middle" rot="R180"/>
+<pin name="GND" x="10.16" y="-2.54" length="middle" rot="R180"/>
+<pin name="3V" x="10.16" y="-5.08" length="middle" rot="R180"/>
+<pin name="5V" x="10.16" y="-7.62" length="middle" rot="R180"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="SDCARD">
+<gates>
+<gate name="G$1" symbol="SDCARD" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="SDCARD">
+<connects>
+<connect gate="G$1" pin="3V" pad="3V"/>
+<connect gate="G$1" pin="5V" pad="5V"/>
+<connect gate="G$1" pin="CD" pad="CD"/>
+<connect gate="G$1" pin="CLK" pad="CLK"/>
+<connect gate="G$1" pin="CS" pad="CS"/>
+<connect gate="G$1" pin="DI" pad="DI"/>
+<connect gate="G$1" pin="DO" pad="DO"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -530,9 +592,9 @@
 </classes>
 <parts>
 <part name="ARDUCAM" library="pinhead" deviceset="PINHD-1X8" device="/90"/>
-<part name="SDCARD" library="pinhead" deviceset="PINHD-1X8" device=""/>
 <part name="COMMS" library="pinhead" deviceset="PINHD-2X8" device=""/>
 <part name="HEADERS" library="pinhead" deviceset="PINHD-2X8" device=""/>
+<part name="U$2" library="sdcard" deviceset="SDCARD" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -540,9 +602,9 @@
 </plain>
 <instances>
 <instance part="ARDUCAM" gate="A" x="25.4" y="60.96"/>
-<instance part="SDCARD" gate="A" x="175.26" y="60.96"/>
 <instance part="COMMS" gate="A" x="71.12" y="101.6"/>
 <instance part="HEADERS" gate="A" x="91.44" y="63.5"/>
+<instance part="U$2" gate="G$1" x="182.88" y="63.5" rot="R180"/>
 </instances>
 <busses>
 </busses>
@@ -562,11 +624,11 @@
 <wire x1="76.2" y1="68.58" x2="88.9" y2="68.58" width="0.1524" layer="91"/>
 <wire x1="76.2" y1="68.58" x2="76.2" y2="86.36" width="0.1524" layer="91"/>
 <wire x1="76.2" y1="86.36" x2="139.7" y2="86.36" width="0.1524" layer="91"/>
-<wire x1="139.7" y1="86.36" x2="139.7" y2="66.04" width="0.1524" layer="91"/>
-<pinref part="SDCARD" gate="A" pin="3"/>
-<wire x1="139.7" y1="66.04" x2="172.72" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="139.7" y1="86.36" x2="139.7" y2="58.42" width="0.1524" layer="91"/>
 <label x="139.7" y="66.04" size="1.778" layer="95"/>
 <junction x="76.2" y="68.58"/>
+<pinref part="U$2" gate="G$1" pin="DI"/>
+<wire x1="139.7" y1="58.42" x2="172.72" y2="58.42" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="MISO" class="0">
@@ -574,14 +636,14 @@
 <pinref part="ARDUCAM" gate="A" pin="3"/>
 <pinref part="HEADERS" gate="A" pin="5"/>
 <wire x1="22.86" y1="66.04" x2="78.74" y2="66.04" width="0.1524" layer="91"/>
-<pinref part="SDCARD" gate="A" pin="4"/>
 <wire x1="78.74" y1="66.04" x2="88.9" y2="66.04" width="0.1524" layer="91"/>
-<wire x1="172.72" y1="63.5" x2="137.16" y2="63.5" width="0.1524" layer="91"/>
-<wire x1="137.16" y1="63.5" x2="137.16" y2="83.82" width="0.1524" layer="91"/>
+<wire x1="137.16" y1="60.96" x2="137.16" y2="83.82" width="0.1524" layer="91"/>
 <wire x1="137.16" y1="83.82" x2="78.74" y2="83.82" width="0.1524" layer="91"/>
 <wire x1="78.74" y1="83.82" x2="78.74" y2="66.04" width="0.1524" layer="91"/>
 <label x="137.16" y="63.5" size="1.778" layer="95"/>
 <junction x="78.74" y="66.04"/>
+<pinref part="U$2" gate="G$1" pin="DO"/>
+<wire x1="137.16" y1="60.96" x2="172.72" y2="60.96" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="CLK" class="0">
@@ -592,11 +654,11 @@
 <wire x1="81.28" y1="63.5" x2="88.9" y2="63.5" width="0.1524" layer="91"/>
 <wire x1="81.28" y1="63.5" x2="81.28" y2="78.74" width="0.1524" layer="91"/>
 <wire x1="81.28" y1="78.74" x2="132.08" y2="78.74" width="0.1524" layer="91"/>
-<wire x1="132.08" y1="78.74" x2="132.08" y2="60.96" width="0.1524" layer="91"/>
-<pinref part="SDCARD" gate="A" pin="5"/>
-<wire x1="172.72" y1="60.96" x2="132.08" y2="60.96" width="0.1524" layer="91"/>
-<label x="132.08" y="60.96" size="1.778" layer="95"/>
+<wire x1="132.08" y1="78.74" x2="132.08" y2="63.5" width="0.1524" layer="91"/>
+<label x="132.08" y="66.04" size="1.778" layer="95"/>
 <junction x="81.28" y="63.5"/>
+<pinref part="U$2" gate="G$1" pin="CLK"/>
+<wire x1="132.08" y1="63.5" x2="172.72" y2="63.5" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -607,11 +669,11 @@
 <wire x1="73.66" y1="60.96" x2="88.9" y2="60.96" width="0.1524" layer="91"/>
 <wire x1="73.66" y1="60.96" x2="73.66" y2="43.18" width="0.1524" layer="91"/>
 <wire x1="73.66" y1="43.18" x2="149.86" y2="43.18" width="0.1524" layer="91"/>
-<wire x1="149.86" y1="43.18" x2="149.86" y2="58.42" width="0.1524" layer="91"/>
+<wire x1="149.86" y1="43.18" x2="149.86" y2="66.04" width="0.1524" layer="91"/>
 <junction x="73.66" y="60.96"/>
 <label x="73.66" y="43.18" size="1.778" layer="95"/>
-<pinref part="SDCARD" gate="A" pin="6"/>
-<wire x1="149.86" y1="58.42" x2="172.72" y2="58.42" width="0.1524" layer="91"/>
+<pinref part="U$2" gate="G$1" pin="GND"/>
+<wire x1="149.86" y1="66.04" x2="172.72" y2="66.04" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="5V" class="0">
@@ -622,11 +684,11 @@
 <wire x1="78.74" y1="58.42" x2="88.9" y2="58.42" width="0.1524" layer="91"/>
 <wire x1="78.74" y1="58.42" x2="78.74" y2="45.72" width="0.1524" layer="91"/>
 <wire x1="78.74" y1="45.72" x2="147.32" y2="45.72" width="0.1524" layer="91"/>
-<wire x1="147.32" y1="45.72" x2="147.32" y2="53.34" width="0.1524" layer="91"/>
 <junction x="78.74" y="58.42"/>
 <label x="78.74" y="45.72" size="1.778" layer="95"/>
-<pinref part="SDCARD" gate="A" pin="8"/>
-<wire x1="172.72" y1="53.34" x2="147.32" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="147.32" y1="45.72" x2="147.32" y2="71.12" width="0.1524" layer="91"/>
+<pinref part="U$2" gate="G$1" pin="5V"/>
+<wire x1="147.32" y1="71.12" x2="172.72" y2="71.12" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$7" class="0">
@@ -643,11 +705,11 @@
 <wire x1="22.86" y1="53.34" x2="88.9" y2="53.34" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$5" class="0">
+<net name="N$2" class="0">
 <segment>
-<pinref part="SDCARD" gate="A" pin="2"/>
-<pinref part="HEADERS" gate="A" pin="4"/>
-<wire x1="172.72" y1="68.58" x2="96.52" y2="68.58" width="0.1524" layer="91"/>
+<pinref part="U$2" gate="G$1" pin="CS"/>
+<pinref part="HEADERS" gate="A" pin="14"/>
+<wire x1="172.72" y1="55.88" x2="96.52" y2="55.88" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

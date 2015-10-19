@@ -62,10 +62,10 @@
 <wire x1="80.27" y1="0" x2="80.27" y2="80" width="0" layer="20"/>
 <wire x1="80.27" y1="80" x2="0" y2="80" width="0" layer="20"/>
 <wire x1="0" y1="80" x2="0" y2="0" width="0" layer="20"/>
-<hole x="5" y="75" drill="0.6"/>
-<hole x="75" y="75" drill="0.6"/>
-<hole x="75" y="5" drill="0.6"/>
-<hole x="5" y="5" drill="0.6"/>
+<hole x="5" y="75" drill="3"/>
+<hole x="75" y="75" drill="3"/>
+<hole x="75" y="5" drill="3"/>
+<hole x="5" y="5" drill="3"/>
 </plain>
 <libraries>
 <library name="pinhead">

@@ -30,27 +30,7 @@ float * loc; //make pointer
 void setup(void){  
   //IMU Setup
   Serial.begin(9600); //enable debugging, sending data back to computer
-  Serial.println("Gyroscope Test"); Serial.println("");
-  
-  /* Enable auto-ranging */
-  gyro.enableAutoRange(true);
-  
-  /* Initialise the sensor */
-  if(!gyro.begin())
-  {
-    /* There was a problem detecting the L3GD20 ... check your connections */
-    Serial.println("Ooops, no L3GD20 detected ... error!");
-    while(1); //hang code
-  }
-  
-  //Magnetometer setup
-  //state pin directions
-  for (int i = 2; i<7;i++){    
-    pinMode(i, OUTPUT);
-  }
-  pinMode(39, OUTPUT);
-  pinMode(41, OUTPUT);
-  pinMode(43, OUTPUT);
+  imusetup();
 }
 
 void loop(void){
@@ -134,6 +114,30 @@ void changemag(float diff){
   //can swap them around to change directions
   //pin8 enable
   //pin 6 and 7 control direction
+}
+
+void imusetup(void){
+    Serial.println("Gyroscope Test"); Serial.println("");
+  
+  /* Enable auto-ranging */
+  gyro.enableAutoRange(true);
+  
+  /* Initialise the sensor */
+  if(!gyro.begin())
+  {
+    /* There was a problem detecting the L3GD20 ... check your connections */
+    Serial.println("Ooops, no L3GD20 detected ... error!");
+    while(1); //hang code
+  }
+  
+  //Magnetometer setup
+  //state pin directions
+  for (int i = 2; i<7;i++){    
+    pinMode(i, OUTPUT);
+  }
+  pinMode(39, OUTPUT);
+  pinMode(41, OUTPUT);
+  pinMode(43, OUTPUT);
 }
 
 

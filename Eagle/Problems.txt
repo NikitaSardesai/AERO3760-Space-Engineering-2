@@ -1,0 +1,16 @@
+Problems
+
+Fixed
+
+bottomboard holes sized wrong
+bottomboard camera wrong way around
+MCU wrong way up
+mcuboard pin headers wrong
+all things need to be labelled
+charging circuits wrong size
+pmu board headers sized wrong
+
+To Go
+
+did voltage regulators actually get ordered?
+

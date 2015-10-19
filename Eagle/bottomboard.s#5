@@ -554,6 +554,7 @@
 <pin name="GND" x="10.16" y="-2.54" length="middle" rot="R180"/>
 <pin name="3V" x="10.16" y="-5.08" length="middle" rot="R180"/>
 <pin name="5V" x="10.16" y="-7.62" length="middle" rot="R180"/>
+<text x="-25.4" y="10.16" size="1.27" layer="94">&gt;SDCARD</text>
 </symbol>
 </symbols>
 <devicesets>

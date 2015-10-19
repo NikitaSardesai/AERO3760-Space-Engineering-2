@@ -175,18 +175,18 @@
 <wire x1="31.75" y1="0" x2="31.75" y2="25.4" width="0.127" layer="21"/>
 <wire x1="31.75" y1="25.4" x2="0" y2="25.4" width="0.127" layer="21"/>
 <wire x1="0" y1="25.4" x2="0" y2="0" width="0.127" layer="21"/>
-<pad name="CD" x="30.48" y="21.59" drill="0.8" shape="square"/>
-<pad name="CS" x="30.48" y="19.05" drill="0.8" shape="square"/>
-<pad name="DI" x="30.48" y="16.51" drill="0.8" shape="square"/>
-<pad name="DO" x="30.48" y="13.97" drill="0.8" shape="square"/>
-<pad name="CLK" x="30.48" y="11.43" drill="0.8" shape="square"/>
-<pad name="GND" x="30.48" y="8.89" drill="0.8" shape="square"/>
-<pad name="3V" x="30.48" y="6.35" drill="0.8" shape="square"/>
-<pad name="5V" x="30.48" y="3.81" drill="0.8" shape="square"/>
 <hole x="2.54" y="22.86" drill="2.448559375"/>
 <hole x="2.54" y="2.54" drill="2.46"/>
 <hole x="22.86" y="2.54" drill="2.448559375"/>
 <hole x="22.86" y="22.86" drill="2.448559375"/>
+<pad name="CD" x="30.48" y="21.59" drill="1.016" shape="square"/>
+<pad name="CS" x="30.48" y="19.05" drill="1.016" shape="square"/>
+<pad name="DI" x="30.48" y="16.51" drill="1.016" shape="square"/>
+<pad name="DO" x="30.48" y="13.97" drill="1.016" shape="square"/>
+<pad name="CLK" x="30.48" y="11.43" drill="1.016" shape="square"/>
+<pad name="GND" x="30.48" y="8.89" drill="1.016" shape="square"/>
+<pad name="3V" x="30.48" y="6.35" drill="1.016" shape="square"/>
+<pad name="5V" x="30.48" y="3.81" drill="1.016" shape="square"/>
 </package>
 </packages>
 </library>
@@ -197,18 +197,18 @@
 <wire x1="34.29" y1="-1.27" x2="34.29" y2="24.13" width="0.127" layer="21"/>
 <wire x1="34.29" y1="24.13" x2="0" y2="24.13" width="0.127" layer="21"/>
 <wire x1="0" y1="24.13" x2="0" y2="-1.27" width="0.127" layer="21"/>
-<pad name="CS" x="2.54" y="20.32" drill="0.8" shape="square"/>
-<pad name="MOSI" x="2.54" y="17.78" drill="0.8" shape="square"/>
-<pad name="MISO" x="2.54" y="15.24" drill="0.8" shape="square"/>
-<pad name="SCLK" x="2.54" y="12.7" drill="0.8" shape="square"/>
-<pad name="GND" x="2.54" y="10.16" drill="0.8" shape="square"/>
-<pad name="5V" x="2.54" y="7.62" drill="0.8" shape="square"/>
-<pad name="SDA" x="2.54" y="5.08" drill="0.8" shape="square"/>
-<pad name="SCL" x="2.54" y="2.54" drill="0.8" shape="square"/>
 <hole x="31.75" y="21.59" drill="2.8"/>
 <hole x="31.75" y="1.27" drill="2.8"/>
 <circle x="19.05" y="11.43" radius="8.51941875" width="0.127" layer="21"/>
 <text x="12.7" y="21.59" size="1.27" layer="21">&gt;ARDUCAM</text>
+<pad name="CS" x="2.54" y="20.32" drill="1.016" shape="square"/>
+<pad name="MOSI" x="2.54" y="17.78" drill="1.016" shape="square"/>
+<pad name="MISO" x="2.54" y="15.24" drill="1.016" shape="square"/>
+<pad name="SCLK" x="2.54" y="12.7" drill="1.016" shape="square"/>
+<pad name="GND" x="2.54" y="10.16" drill="1.016" shape="square"/>
+<pad name="5V" x="2.54" y="7.62" drill="1.016" shape="square"/>
+<pad name="SDA" x="2.54" y="5.08" drill="1.016" shape="square"/>
+<pad name="SCL" x="2.54" y="2.54" drill="1.016" shape="square"/>
 </package>
 </packages>
 </library>
@@ -219,38 +219,22 @@
 <wire x1="-10.16" y1="8.89" x2="46.99" y2="8.89" width="0.127" layer="21"/>
 <wire x1="46.99" y1="8.89" x2="46.99" y2="-21.59" width="0.127" layer="21"/>
 <wire x1="46.99" y1="-21.59" x2="-10.16" y2="-21.59" width="0.127" layer="21"/>
-<pad name="GND" x="-7.62" y="2.54" drill="0.8" shape="square"/>
-<pad name="CTS" x="-7.62" y="0" drill="0.8" shape="square"/>
-<pad name="VUSB" x="-7.62" y="-2.54" drill="0.8" shape="square"/>
-<pad name="RX" x="-7.62" y="-5.08" drill="0.8" shape="square"/>
-<pad name="TX" x="-7.62" y="-7.62" drill="0.8" shape="square"/>
-<pad name="RTS" x="-7.62" y="-10.16" drill="0.8" shape="square"/>
-<pad name="P0.1" x="-7.62" y="-12.7" drill="0.8" shape="square"/>
-<pad name="P2.6" x="-7.62" y="-15.24" drill="0.8" shape="square"/>
-<pad name="GND_2" x="-5.08" y="2.54" drill="0.8" shape="square"/>
-<pad name="5V" x="-5.08" y="0" drill="0.8" shape="square"/>
-<pad name="VUSB_2" x="-5.08" y="-2.54" drill="0.8" shape="square"/>
-<pad name="P2.3" x="-5.08" y="-5.08" drill="0.8" shape="square"/>
-<pad name="P2.2" x="-5.08" y="-7.62" drill="0.8" shape="square"/>
-<pad name="P2.1" x="-5.08" y="-10.16" drill="0.8" shape="square"/>
-<pad name="P2.0" x="-5.08" y="-12.7" drill="0.8" shape="square"/>
-<pad name="GND_3" x="-5.08" y="-15.24" drill="0.8" shape="square"/>
-<hole x="-7.62" y="2.54" drill="0.6"/>
-<hole x="-7.62" y="0" drill="0.6"/>
-<hole x="-7.62" y="-2.54" drill="0.6"/>
-<hole x="-7.62" y="-5.08" drill="0.6"/>
-<hole x="-7.62" y="-7.62" drill="0.6"/>
-<hole x="-7.62" y="-10.16" drill="0.6"/>
-<hole x="-7.62" y="-12.7" drill="0.6"/>
-<hole x="-7.62" y="-15.24" drill="0.6"/>
-<hole x="-5.08" y="-15.24" drill="0.6"/>
-<hole x="-5.08" y="-12.7" drill="0.6"/>
-<hole x="-5.08" y="-10.16" drill="0.6"/>
-<hole x="-5.08" y="-7.62" drill="0.6"/>
-<hole x="-5.08" y="-5.08" drill="0.6"/>
-<hole x="-5.08" y="-2.54" drill="0.6"/>
-<hole x="-5.08" y="0" drill="0.6"/>
-<hole x="-5.08" y="2.54" drill="0.6"/>
+<pad name="GND" x="-7.62" y="2.54" drill="1.016" shape="square"/>
+<pad name="CTS" x="-7.62" y="0" drill="1.016" shape="square"/>
+<pad name="VUSB" x="-7.62" y="-2.54" drill="1.016" shape="square"/>
+<pad name="RX" x="-7.62" y="-5.08" drill="1.016" shape="square"/>
+<pad name="TX" x="-7.62" y="-7.62" drill="1.016" shape="square"/>
+<pad name="RTS" x="-7.62" y="-10.16" drill="1.016" shape="square"/>
+<pad name="P0.1" x="-7.62" y="-12.7" drill="1.016" shape="square"/>
+<pad name="P2.6" x="-7.62" y="-15.24" drill="1.016" shape="square"/>
+<pad name="GND_2" x="-5.08" y="2.54" drill="1.016" shape="square"/>
+<pad name="5V" x="-5.08" y="0" drill="1.016" shape="square"/>
+<pad name="VUSB_2" x="-5.08" y="-2.54" drill="1.016" shape="square"/>
+<pad name="P2.3" x="-5.08" y="-5.08" drill="1.016" shape="square"/>
+<pad name="P2.2" x="-5.08" y="-7.62" drill="1.016" shape="square"/>
+<pad name="P2.1" x="-5.08" y="-10.16" drill="1.016" shape="square"/>
+<pad name="P2.0" x="-5.08" y="-12.7" drill="1.016" shape="square"/>
+<pad name="GND_3" x="-5.08" y="-15.24" drill="1.016" shape="square"/>
 <hole x="-7.62" y="6.35" drill="3.81"/>
 <hole x="-7.62" y="-19.05" drill="3.81"/>
 <hole x="44.45" y="-6.35" drill="3.81"/>

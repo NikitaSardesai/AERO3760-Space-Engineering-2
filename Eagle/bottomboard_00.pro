@@ -1,9 +1,9 @@
 EAGLE AutoRouter Statistics:
 
-Job           : C:/Users/Player/Documents/eagle/SnapSat/bottomboard.brd
+Job           : C:/Users/Player/Documents/GitHub/AERO3760-Space-Engineering-2/Eagle/bottomboard.brd
 
 Start at      : 12:15:54 (27/09/2015)
-End at        : 12:16:01 (27/09/2015)
+End at        : 22:47:21 (19/10/2015)
 Elapsed time  : 00:00:05
 
 Signals       :    11   RoutingGrid: 9 mil  Layers: 2
@@ -22,4 +22,4 @@ Routed            :        18        18        14        14        14        14 
 Vias              :         0         0         0         0         0         0         0         0         0         0         0         0         0         0
 Resolution        :   100.0 %   100.0 %    77.8 %    77.8 %    77.8 %    77.8 %    77.8 %    77.8 %    77.8 %    77.8 %    77.8 %    77.8 %    77.8 %    77.8 %
 
-Final             : 77.8% finished
+Final             : 
