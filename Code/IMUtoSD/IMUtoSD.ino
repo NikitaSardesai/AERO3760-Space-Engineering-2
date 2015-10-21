@@ -1,5 +1,5 @@
 /*
- IMU to SD logger
+ IMU to SD to Arducam Logger
  	
  The circuit:
  SD
@@ -17,6 +17,13 @@
  created  19 Oct 2015
  by Penelope Player
  	 
+ Arducam
+  * analog sensors on analog ins 0, 1, and 2
+ * SD card attached to SPI bus as follows:
+ ** MOSI - pin 11
+ ** MISO - pin 12
+ ** CLK - pin 13
+ ** CS - pin 9
  */
 
 #include <SD.h>
@@ -36,7 +43,8 @@
 // Wiz820+SD board: pin 4
 // Teensy 2.0: pin 0
 // Teensy++ 2.0: pin 20
-const int chipSelect = 10;
+const int chipSelectSD = 10;
+const int chipSelectArducam = 9;
 
 //IMU HEADERS
 #include <Wire.h>
@@ -47,6 +55,27 @@ const int chipSelect = 10;
 
 //MAG CALC HEADERS
 #include <math.h>
+
+//Arducam Headers
+#include <HW_AVR_SPI_defines.h>
+#include <UTFT_SPI.h>
+
+#include <ArduCAM.h>
+#include <memorysaver.h>
+#include <mt9d111_regs.h>
+#include <mt9d112_regs.h>
+#include <mt9m001_regs.h>
+#include <mt9m112_regs.h>
+#include <mt9t112_regs.h>
+#include <mt9v111_regs.h>
+#include <ov2640_regs.h>
+#include <ov3640_regs.h>
+#include <ov5640_regs.h>
+#include <ov5642_regs.h>
+#include <ov7660_regs.h>
+#include <ov7670_regs.h>
+#include <ov7675_regs.h>
+#include <ov7725_regs.h>
 
 /* Assign a unique ID to the sensors */
 Adafruit_L3GD20_Unified gyro = Adafruit_L3GD20_Unified(20);
@@ -64,6 +93,7 @@ void setup()
   Serial.begin(9600);
   // Setup programs for each individual component go here
   sdcardsetup();
+  arducamsetup();
   imusetup();
 }
 
@@ -88,6 +118,12 @@ void sdcardsetup(void){
   }
   Serial.println("card initialized.");
 }
+
+void arducamsetup(void){
+  Serial.print("Initializing Arducam...");
+  // make sure that the default chip select pin is set to
+  // output, even if you don't use it:
+  pinMode(9, OUTPUT);
 
 void imusetup(void){
   Serial.println("Gyroscope Test"); 
