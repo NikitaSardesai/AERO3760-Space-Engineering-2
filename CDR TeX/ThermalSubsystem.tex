@@ -19,24 +19,7 @@ between bodies 1 and 2. Additionally, the heat radiated from a blackbody surface
 \noindent
 Where the proportionality factor depends on physical constants, the material properties, surface conditions and geometry. A schematic of the incoming thermal radiation on the CubeSat in Low-Earth Orbit (LEO) is shown below.
 \begin{figure}[H]
-    \pic{0.8}{./figures/thermaloverview}{Incoming thermal radiation on the satellite}
-\end{figure}
-\noindent
-
-\subsection{Total Incoming Radiation}
-The total radiation incoming onto the satellite as it orbits is defined in figure~\ref{plot:incomingradiation} below. This assumes that the satellite is in full view of the sun 65\% of the time in each orbit.
-\begin{figure}[H]
-    \tikzpic{0.7}{0.4}{./figures/incomingradiation.tex}{Radiation incoming onto the satellite as it orbits}
-    \label{plot:incomingradiation}
-\end{figure}
-\noindent
-Whilst this is the incoming radiation on the satellite as a whole, it is not indicative of the amount of radiation received by each side of the satellite. As the spacecraft is attitude controlled, the lower side will be facing the Earth always and only receive solar radiation for a short period of time. The amount of solar radiation (and even Earth IR radiation) received depends on the projected area that the radiation falls upon. Corrections are found using the view factor of each side of the satellite.
-
-\subsubsection{View Factors}
-The view factor of each side of the satellite allows for the calculation of the effect of the incoming radiation. The calculation takes into account the projected amount of heat flux on each side. The calculation takes into account the projected 
-
-\begin{figure}[H]
-    \pic{0.55}{./figures/orbit.png}{arg3}
+    \pic{0.8}{./figures/thermaloverview}{Incoming thermal radiation on the satellite}\label{fig:incomingradiation}
 \end{figure}
 
 \subsection{The Three Modes of Heat Transfer}
@@ -62,15 +45,56 @@ which is the same as equation~\ref{eqn:Qconduction}. The heat transfer depends o
 \subsubsection{Radiation}
 Perhaps the most complex form of heat transfer is radiation, where all bodies above 0K emit and absorb electromagnetic energy. We consider each body as a perfect emitter (black body) and integrate the emitted energy across all wavelengths, this gives
 \begin{equation}
-    E_{bb} = \epsilon\sigma\,T^4
+E_{bb} = \epsilon\sigma\,T^4
 \end{equation}
 measured in Watts/m$^2$. This is the same as equation~\ref{eqn:Qradiation}, where $\sigma$ is the Stefan-Boltzmann constant. In this case, the emissivity $\epsilon$ has been added to account for the fact that the surfaces are not perfect black bodies.
 
+\subsection{Total Incoming Radiation}
+The total radiation incoming onto the satellite as it orbits is defined in figure~\ref{plot:incomingradiation} below. This assumes that the satellite is in full view of the sun 65\% of the time in each orbit.
 \begin{figure}[H]
-    \tikzpic{0.8}{0.3}{./figures/PanelIncoming3.tex}{Solar radiation falling on each panel}
+    \tikzpic{0.7}{0.35}{./figures/incomingradiation.tex}{Radiation incoming onto the satellite as it orbits}
+    \label{plot:incomingradiation}
+\end{figure}
+\noindent
+Whilst this is the incoming radiation on the satellite as a whole, it is not indicative of the amount of radiation received by each side of the satellite. As the spacecraft is attitude controlled, the lower side will be facing the Earth always and only receive solar radiation for a short period of time. The amount of solar radiation (and even Earth IR radiation) received depends on the projected area that the radiation falls upon. Corrections are found using the view factor of each side of the satellite.
+
+\subsubsection{View Factors}
+The view factor of each side of the satellite allows for the calculation of the effect of the incoming radiation. The calculation takes into account the projected amount of heat flux on each side. The calculation takes into account the projected 
+
+\begin{figure}[H]
+    \pic{0.5}{./figures/orbit.png}{arg3}
+\end{figure}
+
+
+
+\subsection{Spacecraft Thermal Environment}
+As shown in figure~\ref{fig:incomingradiation}, the spacecraft is subject to the following heating mediums: solar radiation, Earth infra-red and Earth albedo. The amount of radiation falling upon each panel is a function of the surface absorptivity and the view factor of the panel. The panel naming convention for this section is shown below.
+
+\subsubsection{Solar Radiation}
+The incoming solar radiation on the satellite is given by
+\begin{equation}
+    Q_{solar} = Q_{sun}\,\alpha\cos\phi
+\end{equation}
+\vspace{-1cm}
+\begin{align}
+\text{Where}\quad Q_{sun} &= \text{solar heat flux (Watts)} \nonumber\\
+\alpha &= \text{surface absorptivity} \nonumber\\
+\phi &= \text{angle between the normal of the panel to the sun (rad)} \nonumber
+\end{align}
+\noindent
+For each of the panels, the solar radiation intensity is shown in the figure below. The skew in four of the panels is due to the 45\deg rotation of the orbit along the $z$ Earth frame.
+
+\begin{figure}[H]
+    \tikzpic{0.9}{0.25}{./figures/SolarIncomingPanels.tex}{Solar radiation falling on each panel}
 \end{figure}
 
 \begin{figure}[H]
     \tikzpic{0.8}{0.3}{./figures/PanelIncoming4.tex}{Total radiation falling upon panel 2}
 \end{figure}
+
+
+\begin{figure}[H]
+    \tikzpic{0.8}{0.25}{./figures/TotalIncomingPanels.tex}{Total radiation falling upon panel 2}
+\end{figure}
+
 
