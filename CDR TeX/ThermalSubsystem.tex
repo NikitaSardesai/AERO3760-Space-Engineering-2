@@ -58,11 +58,11 @@ The total radiation incoming onto the satellite as it orbits is defined in figur
 \noindent
 Whilst this is the incoming radiation on the satellite as a whole, it is not indicative of the amount of radiation received by each side of the satellite. As the spacecraft is attitude controlled, the lower side will be facing the Earth always and only receive solar radiation for a short period of time. The amount of solar radiation (and even Earth IR radiation) received depends on the projected area that the radiation falls upon. Corrections are found using the view factor of each side of the satellite.
 
-\subsubsection{View Factors}
-The view factor of each side of the satellite allows for the calculation of the effect of the incoming radiation. The calculation takes into account the projected amount of heat flux on each side. The calculation takes into account the projected 
+\subsubsection{View Factors}\label{sec:viewfactors}
+The view factor of each side of the satellite allows for the calculation of the effect of the incoming radiation. The calculation takes into account the projected amount of heat flux on each side. The view factor is of importance when considering the radiation effect of Earth's infrared and albedo. The view factor indicates the area of the panel that  radiation falls upon. Naturally, the view factor fo the panel facing the Earth is 1, whilst that of the panel facing away from the Earth is 0. The other panels lie between these values, they are listed below.
 
 \begin{figure}[H]
-    \pic{0.5}{./figures/orbit.png}{arg3}
+    \pic{0.5}{./figures/orbit.png}{Representation of Satellite Orbit}
 \end{figure}
 
 
@@ -78,7 +78,7 @@ The incoming solar radiation on the satellite is given by
 \vspace{-1cm}
 \begin{align}
 \text{Where}\quad Q_{sun} &= \text{solar heat flux (Watts)} \nonumber\\
-\alpha &= \text{surface absorptivity} \nonumber\\
+\alpha &= \text{panel surface absorptivity} \nonumber\\
 \phi &= \text{angle between the normal of the panel to the sun (rad)} \nonumber
 \end{align}
 \noindent
@@ -88,10 +88,22 @@ For each of the panels, the solar radiation intensity is shown in the figure bel
     \tikzpic{0.9}{0.25}{./figures/SolarIncomingPanels.tex}{Solar radiation falling on each panel}
 \end{figure}
 
-\begin{figure}[H]
-    \tikzpic{0.8}{0.3}{./figures/PanelIncoming4.tex}{Total radiation falling upon panel 2}
-\end{figure}
+\subsubsection{Earth Infrared Radiation}
+The incoming radiation from the Earth is in the infrared band. This radiation is due to the effective temperature of the Earth and is a constant value for each panel. For this reason, the values will not be displayed on a graph. The incoming radiation varies from panel to panel depending only on the view factors as described in section~\ref{sec:viewfactors}. The value is given by
+\begin{equation}
+    Q_{Earth-IR} = \sigma T_{Earth}^4 \alpha \, VF 
+\end{equation}
+\vspace{-1cm}
+\begin{align}
+\text{Where}\quad \sigma &= 1.381 \times 10^{-23}\text{ m$^2$ kg s$^{-2}$ K$^{-1}$ (Boltmann constant)} \nonumber\\
+T &= \text{effective temperature of the Earth} \nonumber\\
+\alpha &= \text{panel surface absorptivity} \nonumber\\
+VF &= \text{panel view factor} \nonumber
+\end{align}
 
+\subsubsection{Earth Albedo}
+
+\subsubsection{Total Incoming Radiation Per Panel}
 
 \begin{figure}[H]
     \tikzpic{0.8}{0.25}{./figures/TotalIncomingPanels.tex}{Total radiation falling upon panel 2}
