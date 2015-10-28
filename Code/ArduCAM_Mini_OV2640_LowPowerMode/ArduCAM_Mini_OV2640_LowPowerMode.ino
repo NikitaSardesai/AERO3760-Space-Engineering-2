@@ -3,8 +3,10 @@
 #include <SPI.h>
 #include "memorysaver.h"
 
-// set pin 9 as the slave select for the digital pot:
-const int CS = 9;
+//works on due and uno
+
+// set pin 10 as the slave select for the digital pot:
+const int CS = 10; //definately 10 on the due
 
 ArduCAM myCAM(OV2640,CS);
 
@@ -17,14 +19,16 @@ void setup() {
 #if defined(__arm__)
   Wire1.begin();
 #endif 
-  Serial.begin(921600);
+  
+  Serial.begin(9600);
   Serial.println("ArduCAM Start!"); 
 
   // set the SPI_CS as an output:
   pinMode(CS, OUTPUT);
 
   // initialize SPI:
-  SPI.begin(); 
+  SPI.begin(); //dont put CS in here, breaks it
+
   //Check if the ArduCAM SPI bus is OK
   myCAM.write_reg(ARDUCHIP_TEST1, 0x55);
   temp = myCAM.read_reg(ARDUCHIP_TEST1);

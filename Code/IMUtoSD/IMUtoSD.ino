@@ -111,7 +111,7 @@ void sdcardsetup(void){
   pinMode(10, OUTPUT);
 
   // see if the card is present and can be initialized:
-  if (!SD.begin(chipSelect)) {
+  if (!SD.begin(chipSelectSD)) {
     Serial.println("Card failed, or not present");
     // don't do anything more:
     return;
@@ -124,6 +124,7 @@ void arducamsetup(void){
   // make sure that the default chip select pin is set to
   // output, even if you don't use it:
   pinMode(9, OUTPUT);
+}
 
 void imusetup(void){
   Serial.println("Gyroscope Test"); 

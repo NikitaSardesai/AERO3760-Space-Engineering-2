@@ -8,7 +8,7 @@
  ** MOSI - pin 11
  ** MISO - pin 12
  ** CLK - pin 13
- ** CS - pin 10
+ ** CS - pin 11
  
  IMU
  SCL - pin A5
@@ -23,7 +23,7 @@
  ** MOSI - pin 11
  ** MISO - pin 12
  ** CLK - pin 13
- ** CS - pin 9
+ ** CS - pin 10
  */
 
 #include <SD.h>
@@ -46,8 +46,8 @@
 // Wiz820+SD board: pin 4
 // Teensy 2.0: pin 0
 // Teensy++ 2.0: pin 20
-const int chipSelectSD = 10;
-const int chipSelectArducam = 9;
+const int chipSelectSD = 11;
+const int chipSelectArducam = 10;
 
 //IMU HEADERS
 #include <Wire.h>
@@ -78,7 +78,7 @@ ArduCAM myCAM(OV2640,chipSelectArducam);
 void setup()
 {
   // Open serial communications with computer for debugging purposes
-  Serial.begin(921600);
+  Serial.begin(9600);
   // Setup programs for each individual component go here
   sdcardsetup();
   arducamsetup();
@@ -100,6 +100,7 @@ void sdcardsetup(void){
   // make sure that the default chip select pin is set to
   // output, even if you don't use it:
   pinMode(10, OUTPUT);
+  pinMode(chipSelectSD, OUTPUT);
 
   // see if the card is present and can be initialized:
   if (!SD.begin(chipSelectSD)) {
@@ -115,7 +116,12 @@ void arducamsetup(void){
   uint8_t vid,pid;
   uint8_t temp;
 
-  Wire.begin();
+#if defined (__AVR__)
+  Wire.begin(); 
+#endif
+#if defined(__arm__)
+  Wire1.begin();
+#endif 
   Serial.println("ArduCAM Start!"); 
 
   // set the SPI_CS as an output:
