@@ -1,0 +1,22 @@
+\section{Payload Design}
+
+The SnapSat payload is a single camera, used to take images of the earth throughout the flight.
+Due to the inherent size and power limitation of CubeSats, budget and ease of interface with the Iduino Due Pro, the 2MP ArduCAM Mini was selected. \\
+
+\begin{figure}[H]
+    \pic{0.8}{./figures/arducam}{An image of the ArduCAM Mini.  Note that there is no storage mechanism on this module, necessitating an external SD card.}\label{fig:arducam}
+\end{figure}
+
+Unlike the ArduCAM, on which this is based, the ArduCAM mini has no integrated SD Card to store photos.  As such, the design includes an Adafruit SD Card which stores all pictures.
+
+\begin{figure}[H]
+    \pic{0.8}{./figures/sdcard}{The SD card used in SnapSat}\label{fig:sdcard}
+\end{figure}
+
+\subsection{Integration}
+
+These two devices operate off the one SPI module and are physically located on the Bottom PCB.  Additionally, the ArduCAM mini image sensor is controlled through I2C1 module.  Both devices are powered by the 5V line, and use 3.3V CMOS logic levels, with no step up required. \\ \\
+
+STICK IN IMAGE OF BOTTOM PCB COMPLETED \\
+
+Ultimately using a 16GB SD Card, assuming a size of 1MB per photo, and a balloon flight time of 4 hours this module is able to record 16000 photos or a photo every second.
