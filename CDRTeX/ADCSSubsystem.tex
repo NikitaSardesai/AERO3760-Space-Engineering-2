@@ -1,9 +1,20 @@
 \section{Attitude Determination and Control Subsystem}
-\subsection{Selection of Magnetorquers}
+\subsection{Inertial Measurement Unit}
+The inertial measurement unit (IMU) that was selected for the balloon launch is a 10 degree of freedom (DOF) Adafruit IMU.  It includes a 3DOF magnetometer, a 3D0F accelerometer and a 3DOF gyroscope as well as a barometric pressure/altitude sensor which also includes temperature.  The IMU uses an Attidude Heading and Reference System (AHRS) algorithm that returns the pitch, yaw and roll of the satellite with respect to magnetic north.  Given the fact that this is a very cheap IMU there is a degree of drift associated with the gyroscope which causes inaccuracies.  There is also an error associated with the accelerometer however it is less than the the drift caused by the gyroscope. As such the accelerometer has been used to determine the attitude both for the balloon launch and in the functional testing as the photodiode system will not be functional in either of these tests.\\
+
+
+In terms of the application in space for this component, the major problem with this IMU is that it is not radiation hardened which will result in larger errors the longer it remains in orbit and will eventually cause it to stop working.  Thus in the event of an actual space launch, this component would need to be replaced with a radiation and preferably more accurate component.  The other major error that effects the IMU is accumulated error which is directly related to the amount of time spent in orbit.  Although this may be reduced in higher quality IMU's it will always be an issue.  Thus a secondary orientation system is required in order to determine the attitude of the SnapSat accurately.
+
+\subsection{Photodiode Sun Sensor System}
+A photodiode based sun sensor system was selected to be the secondary orientation system in order to recalibrate the IMU and to use in long duration missions.  This system was primarily selected because it provides enough pointing accuracy for the purposes of this mission and is significantly cheaper than the alternatives of star trackers or actual sun sensors.  The actual component that was selected is an OSRAM SFH203P Photodiode.  Although these are simply off the shelf components, a cover glass can be placed over the photodiodes in order to protect them from UV radiation.
+
+
+
+\section{Selection of Magnetorquers}
 The SnapSat is a relatively small satellite with low mass and power considerations.
 After extensive literature review it was determined that given the mass and power consideration of the SnapSat, magnetorquers would provide a better controls system than 
 
-\subsection{Design of Magnetorquer}
+\section{Design of Magnetorquer}
 The torque on the satellite produced by the magnetorquer is given by cross product of the magnetic dipole of the magnetorquer and the earths magnetic field strength: 
 \begin{center}
 $T = M \times B$
@@ -41,7 +52,7 @@ Magnetic Dipole & Number of Turns & Current & Area & Voltage & Resistance & Powe
 \vspace{-6mm}
 \end{table}
 
-\subsection{Construction of Magnetorquers}
+\section{Construction of Magnetorquers}
 As mentioned previously the Magnetorquers were built in house using equipment provided in the space lab.  The following procedure was applied to make each magnetorquer:
 \begin{enumerate}
 	\item The metal structural mould for the magnetorquer was unscrewed and sticky tape was applied to areas that were likely to come into contact with glue.
@@ -84,7 +95,7 @@ After testing both magnetorquers were found to have a slightly higher resistance
 \end{center}
 \vspace{-5mm}
 
-\subsection{Magnetorquer Control System}
+\section{Magnetorquer Control System}
 The dynamic model for the magnetorquer control system was produced by three fundamental equations:
 \begin{center}
 $T = N \cdot I \cdot A \cdot B \cdot sin(\theta)$ \vspace{2mm} \\
@@ -98,7 +109,7 @@ $\frac{\theta(s)}{V(s)} = \frac{N \cdot A \cdot B}{J \cdot R \cdot s^2 (s^2 + 1)
 Thus using this function the following Simulink model was produced to determine the expected response of the satellite given certain inputs.
 
 \vspace{-6mm}
-\begin{center}
+\begin{center}`
 \begin{figure}[H]
 \caption{Simulink Model of Control System}
 \vspace{-4mm}
@@ -107,4 +118,3 @@ Thus using this function the following Simulink model was produced to determine 
 \end{figure}
 \end{center}
 \vspace{-5mm}
-
