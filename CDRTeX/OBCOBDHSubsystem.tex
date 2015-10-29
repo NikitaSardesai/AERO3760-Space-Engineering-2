@@ -1,7 +1,25 @@
 \section{On-Board Computer and On-board Data Handling Subsystem}
 
-The SnapSat uses an Iduino Due Pro MCU to control the operation of the modules.  It does not use an RTOS, instead using an infinite loop to log image and location data, but interrupt based control to priorities incoming messages of the communications subsystem. \\
+The SnapSat uses an Iduino Due Pro micro controller unit (MCU) to control it's operation.  It does not use an RTOS, instead using the real time clock to trigger events at pre-set times and interrupt based control to prioritize incoming messages of the communications subsystem and other time critical systems (see figure~\ref{fig:modes). \\
 
-FBD OF PROGRAM STRUCTURE \\
+\subsection{Selection}
 
-All data is logged on the SD Card 
+The Iduino Due Pro was chosen because it is a powerful micro controller, with a large amount of program space and sufficient peripherals to run all modules off.  Additionally it has an external removable programmer, which gives it a relatively small form factor, (86.3mm by 53.3mm) allowing to fit easily within the CubeSat.
+
+\subsection{On-board Data Handling}
+
+The MCU interfaces with the other modules through the SPI, I2C1, I2C2, Serial0 and Serial3 peripherals, in addition to several GPIO pins as shown in figure~\ref{fig:mcucon}.  This leaves a Serial and NMEA module free which could easily be used to accommodate further subsystems in the future.  Note that the SPI module and one of the I2C modules are shared between slave components, in such a way that more could be added to these busses in the future.
+
+\begin{figure}[H]
+	\pic{0.8}{./figures/mcucon}{A diagram showing the interactions between the MCU and the other subsystems.}\label{fig:mcucon}
+\end{figure}
+
+\subsection{Modes of Operation}
+
+The CubeSat can operate in several modes of operation throughout an orbital flight, depending on the stage of flight, as laid out in the PDR and shown in figure~\ref{fig:modes}.
+
+\begin{figure}[H]
+	\pic{0.8}{./figures/modes}{A diagram showing the modes of operation during flight.}\label{fig:modes}
+\end{figure}
+
+Balloon flight, unlike orbital flights, have no CubeSat Design Specifications regarding power upon launch~\cite{cds}.  Consequently, SnapSat is to be launched in Standby mode while moving into Payload Operations Mode and Transmissions Mode as required.  However, the CubeSat will never enter Power Critical Mode as shutting down extra systems to conserve power is ineffectual without operational solar panels or a similar means of charging.
