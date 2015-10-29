@@ -59,10 +59,31 @@ The total radiation incoming onto the satellite as it orbits is defined in figur
 Whilst this is the incoming radiation on the satellite as a whole, it is not indicative of the amount of radiation received by each side of the satellite. As the spacecraft is attitude controlled, the lower side will be facing the Earth always and only receive solar radiation for a short period of time. The amount of solar radiation (and even Earth IR radiation) received depends on the projected area that the radiation falls upon. Corrections are found using the view factor of each side of the satellite.
 
 \subsubsection{View Factors}\label{sec:viewfactors}
-The view factor of each side of the satellite allows for the calculation of the effect of the incoming radiation. The calculation takes into account the projected amount of heat flux on each side. The view factor is of importance when considering the radiation effect of Earth's infrared and albedo. The view factor indicates the area of the panel that  radiation falls upon. Naturally, the view factor fo the panel facing the Earth is 1, whilst that of the panel facing away from the Earth is 0. The other panels lie between these values, they are listed below.
+The view factor of each side of the satellite allows for the calculation of the effect of the incoming radiation. The calculation takes into account the projected amount of heat flux on each side. The view factor is of importance when considering the radiation effect of Earth's infrared and albedo. The view factor indicates the area of the panel that  radiation falls upon. The formulae to obtain the view factors for each panel is 
+\begin{equation}
+    F_{i\rightarrow j} = \cfrac{1}{A_i}\int_{A_i} \int_{A_j} \cfrac{cos \theta_1\,\cos\theta_j}{\pi\,S^2} 
+\end{equation}
+\noindent
+Where $S$ is the shape factor. Whilst this a complex equation (especially for complex geometries), the view factors for a simple cubesat orbiting a sphere (Earth) are
+\begin{equation}
+    V_F = \cfrac{\cos\gamma}{H}
+\end{equation}
+\noindent 
+If the panel is facing towards Earth such that the whole surface can be `seen' by the panel. However if the panel is not facing the Earth
+\begin{eqnarray}
+    V_F &=& 0 
+\end{eqnarray}
+\noindent
+If the panel is oriented in such a way that it is only partially oriented to see the Earth then
+\begin{eqnarray}
+    V_F &=& \cfrac{1}{2}-\cfrac{1}{\pi}\sin^{-1}\left(\cfrac{(H^2-1)^{1/2}}{H\sin\gamma}\right) + \cfrac{1}{\pi H^2}\cos\gamma\cos^{-1}\left(-(H^2-1)^{1/2}\cot\gamma\right) \\
+    &\,&\qquad -\cfrac{1}{\pi H^2}(H^2-1)^{1/2}\times(1-H^2\cos^2\gamma)^{1/2}
+\end{eqnarray}
+\noindent
+Where $\gamma$ is the angle between the normal to the Earth's surface (or normal to the projected disk that the satellite panel sees) and the normal to the panel. \cite{heidt2000cubesat}
 
 \begin{figure}[H]
-    \pic{0.5}{./figures/orbit.png}{Representation of Satellite Orbit}
+    \pic{0.35}{./figures/orbit.png}{Representation of Satellite Orbit}
 \end{figure}
 
 
@@ -77,7 +98,7 @@ The incoming solar radiation on the satellite is given by
 \end{equation}
 \vspace{-1cm}
 \begin{align}
-\text{Where}\quad Q_{sun} &= \text{solar heat flux (Watts)} \nonumber\\
+\text{Where}\quad Q_{sun} &= 1350 \text{solar heat flux (W/m$^2$)} \nonumber\\
 \alpha &= \text{panel surface absorptivity} \nonumber\\
 \phi &= \text{angle between the normal of the panel to the sun (rad)} \nonumber
 \end{align}
@@ -91,22 +112,39 @@ For each of the panels, the solar radiation intensity is shown in the figure bel
 \subsubsection{Earth Infrared Radiation}
 The incoming radiation from the Earth is in the infrared band. This radiation is due to the effective temperature of the Earth and is a constant value for each panel. For this reason, the values will not be displayed on a graph. The incoming radiation varies from panel to panel depending only on the view factors as described in section~\ref{sec:viewfactors}. The value is given by
 \begin{equation}
-    Q_{Earth-IR} = \sigma T_{Earth}^4 \alpha \, VF 
+    Q_{Earth-IR} = \sigma T_{Earth}^4 \alpha \, F_V 
 \end{equation}
 \vspace{-1cm}
 \begin{align}
 \text{Where}\quad \sigma &= 1.381 \times 10^{-23}\text{ m$^2$ kg s$^{-2}$ K$^{-1}$ (Boltmann constant)} \nonumber\\
 T &= \text{effective temperature of the Earth} \nonumber\\
 \alpha &= \text{panel surface absorptivity} \nonumber\\
-VF &= \text{panel view factor} \nonumber
+F_V &= \text{panel view factor} \nonumber
 \end{align}
 
 \subsubsection{Earth Albedo}
+The final source of external radiation is the Earth albedo, which is solar radiation that has been reflected off the Earth's could layer. The value as the cubesat orbits the Earth is given by
+\begin{equation}
+Q_{Earth-albedo} = Q_{sun} F_A \alpha F_V \cos\theta
+\end{equation}
+\vspace{-1cm}
+\begin{align}
+\text{Where}\quad Q_{sun} &= 1350 \text{W/m}^2\text{(solar radiation)} \nonumber\\
+F_A &= \text{albedo view factor} \nonumber\\
+\alpha &= \text{panel surface absorptivity} \nonumber\\
+F_V &= \text{panel view factor} \nonumber\\
+\theta & = \text{angle between the spacecraft panel surface and the Sun}
+\end{align}
+The figure below shown the variation in albedo that three panels see throughout the orbit. Since each panel is not double sided, the plot cycles between two opposite panels. For instance, the orange line shown the albedo incoming on both panels 2 and 5 the panel on the opposite side). Half of the cycle representing each panel.
+\begin{figure}[H]
+    \tikzpic{0.9}{0.25}{./figures/FINALALBEDO.tex}{Reflected albedo falling on each panel}
+\end{figure}
 
 \subsubsection{Total Incoming Radiation Per Panel}
-
+For illustration purposes, figure~\ref{fig:Qtotal2} shows the total incoming radiation on panel 2. This calculation was performed for all six panels.
 \begin{figure}[H]
-    \tikzpic{0.8}{0.25}{./figures/TotalIncomingPanels.tex}{Total radiation falling upon panel 2}
+    \tikzpic{0.8}{0.25}{./figures/FINALP2.tex}{Total radiation falling upon panel 2}
+    \label{fig:Qtotal2}
 \end{figure}
 
 
