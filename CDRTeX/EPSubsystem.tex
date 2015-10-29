@@ -1,1 +1,22 @@
 \section{Electrical Power Subsystem}
+
+The Electrical Power Subsystem (EPS) has the function of providing power to the CubeSat.  For orbital flights power comes from ~1W solar cells mounted on 5 of 6 faces, which charges the CubeSat at 1W when it is exposed to direct sunlight.  However, for balloon flights there is insufficient incident light on the sides of the CubeSat due to the container in which it is mounted.  As a result all power comes from two 1200mAh, 3.7 V Adafruit LiPo batteries mounted in the centre of the CubeSat. \\
+
+FIGURE SHOWING LOCATION OF EPS BOARD \\
+
+The EPS consists of two main sections; the charging circuit, and the voltage rails. \\
+
+\subsection{Charging Circuit}
+The charging circuit consists of two Adafruit LiPoly chargers designed to operate in conjunction with LiPo batteries and solar panels.  They automatically draw of whichever source supplies the greatest amount of power (solar panels of batteries) which eliminates the need for a switching circuit when running off battery power.  The only requirement is that the solar panels must provide a minimum of 6V output power supply to overcome the threshold of the internal circuit.  By using two charging circuits rather than one, the batteries can be changed separately, which simplifies the load balancing an the expense of a fuller EPS PCB as shown in figure~\ref{fig:epspcb}.
+
+\begin{figure}[H]
+	\pic{0.8}{./figures/epspcb}{The EPS PCB.  Although this PCB is full it is functional, and the extra changing circuit has not taken the place of another component.}\label{fig:epspcb}
+\end{figure}
+
+\subsection{Voltage Rails}
+Devices in this CubeSat require an even split of 3.3V and 5V power and some, the GPS in particular, require amperages above what the MCU can supply.  Consequently, the EPS provides 3.3V and 5V power rails for components.  However, although the MCU is a 3.3V device it is designed to run of an external supply of 6-20V, which is then transformed using an on board regulator into 5V and 3.3V.  Given that, the EPS provides it's own regulated 5V output which is fed directly into the Iduino's 5V pin.  This has the potential to damage the MCU if done incorrectly so the margin of error for the 5V rail is extremely small. \\
+
+To transform the 3.7V battery power to 3.3V and 5V rails the system uses two TI Buck Boost converters, calibrated for 3.3V and 5V respectively.  These are rated to a maximum current draw of 1.5A which is sufficient to power all devices and were chosen because of their reliability and output voltage stability~\cite{bbdatasheet}.
+
+\subsection{Battery Lifetime}
+Given that the system operates using 250 mA CHECKCHECKCHECK(depending on the precise mode of operation) it can run for 10 hours off this configuration.  As a standard balloon flight is expected to last for a maximum of 4 hours CHECKCHECKCHECK this is more than sufficient to power the CubeSat for the duration of the flight.
