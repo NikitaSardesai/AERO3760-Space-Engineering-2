@@ -41,6 +41,7 @@ The configuration that was chosen includes a baud rate of 57600 with no parity, 
     \includegraphics[width=0.75\linewidth]{./figures/rfd2}
     \caption{Settings used with transciever}
 \end{figure}
+\noindent
 To increase the gain on both ends of the transmission, different antennas will be used at the ground station compared to the satellite. At the ground station we will utilise a yagi antenna. Yagi antennas are recommended for Ground-Station applications due to their size. They have approximately 6dBi gain and give significant link budget improvement when compared to standard dipole, or monopole antennas. 
 \noindent
 On the satellite we will use two quarter wave antennas. The choice was between this and half wave dipole antennas but the quart wave was declared superior due to it’s small size. Quarter Wave Monopole Antennas are recommended for air-borne, or space constrained applications. They are required to be mounted on a ground plane of approximately 20cm diameter or more to operate as intended.
@@ -49,6 +50,7 @@ On the satellite we will use two quarter wave antennas. The choice was between t
     \includegraphics[width=0.6\linewidth]{./figures/antennae}
     \caption{Quarter Wave Monopole Antenna}
 \end{figure}
+\noindent
 The RFD900 has two antenna ports and firmware which supports diversity operation of antennas. During the receive sequence the modem will check both antennas and select the antenna with the best receive signal. In the case of only one antenna connected, it will automatically select the port with the antenna connected. Testing by Silicon Labs has shown that link budgets can be improved in the order of 6-8dB by employing a diversity scheme.
 
 \noindent 
