@@ -1,22 +1,33 @@
 \section{Electrical Power Subsystem}
 
-The Electrical Power Subsystem (EPS) has the function of providing power to the CubeSat.  For orbital flights power comes from ~1W solar cells mounted on 5 of 6 faces, which charges the CubeSat at 1W when it is exposed to direct sunlight.  However, for balloon flights there is insufficient incident light on the sides of the CubeSat due to the container in which it is mounted.  As a result all power comes from two 1200mAh, 3.7 V Adafruit LiPo batteries mounted in the centre of the CubeSat.
+The Electrical Power Subsystem (EPS) has the function of providing power to the CubeSat.  For orbital flights, power comes from ~1W solar cells mounted on 5 of 6 faces, which charges the CubeSat at 1W when it is exposed to direct sunlight.  However, for balloon flights there is insufficient incident light on the sides of the CubeSat due to the container in which it is mounted.  As a result all power comes from two 1200mAh, 3.7 V Adafruit LiPo batteries mounted in the centre of the CubeSat as shown in figure~\ref{fig:epsloc}.
+Overally, the EPS consists of two main sections; the charging circuit, and the voltage rails.
 
-FIGURE SHOWING LOCATION OF EPS BOARD
-
-The EPS consists of two main sections; the charging circuit, and the voltage rails. 
+\begin{figure}[H]
+	\pic{0.8}{./figures/epsloc}{The location of the EPS within the CubeSat.  The EPS is the second component from the top and is highlighted blue.}\label{fig:epsloc}
+\end{figure} 
 
 \subsection{Charging Circuit}
 The charging circuit consists of two Adafruit LiPoly chargers designed to operate in conjunction with LiPo batteries and solar panels.  They automatically draw of whichever source supplies the greatest amount of power (solar panels of batteries) which eliminates the need for a switching circuit when running off battery power.  The only requirement is that the solar panels must provide a minimum of 6V output power supply to overcome the threshold of the internal circuit.  By using two charging circuits rather than one, the batteries can be changed separately, which simplifies the load balancing an the expense of a fuller EPS PCB as shown in figure~\ref{fig:epspcb}.
 
 \begin{figure}[H]
-	\pic{0.8}{./figures/epspcb}{The EPS PCB.  Although this PCB is full it is functional, and the extra changing circuit has not taken the place of another component.}\label{fig:epspcb}
+	\pic{0.8}{./figures/epspcb}{The eagle board file for the EPS PCB.  Although much of the space is taken up by the two LiPo chargers there is still room for the voltage rail circuit.}\label{fig:epspcb}
 \end{figure}
 
 \subsection{Voltage Rails}
-Devices in this CubeSat require an even split of 3.3V and 5V power and some, the GPS in particular, require amperages above what the MCU can supply.  Consequently, the EPS provides 3.3V and 5V power rails for components.  However, although the MCU is a 3.3V device it is designed to run of an external supply of 6-20V, which is then transformed using an on board regulator into 5V and 3.3V.  Given that, the EPS provides it's own regulated 5V output which is fed directly into the Iduino's 5V pin.  This has the potential to damage the MCU if done incorrectly so the margin of error for the 5V rail is extremely small.
+Devices in this CubeSat require an even split of 3.3V and 5V power, mostly within the 800mA of power that the MCU can supply.  However, the communications chip requires a supply of 800mA at 5V, which is infeasible to run off the MCU.  Consequently, the EPS provides an externally powered 5V rail capable of supplying 1.5A of power.  Although the MCU is a 3.3V device, it is designed to be powered by a 6-20V external supply, which is stepped down through a voltage regulator to a 5V supply (for a single pin) which is in turn stepped down to a 3.3V supply.  Although it is considered inadvisable to bypass this voltage regulator this simplifies the circuit design, and there is no danger assuming that our 5V supply is as stable as theirs.
 
-To transform the 3.7V battery power to 3.3V and 5V rails the system uses two TI Buck Boost converters, calibrated for 3.3V and 5V respectively.  These are rated to a maximum current draw of 1.5A which is sufficient to power all devices and were chosen because of their reliability and output voltage stability~\cite{bbdatasheet}.
+To transform the 3.7V battery power to a 5V rail the system uses a TI Buck Boost converter~\cite{bbdatasheet}.  These require a certain amount of external circuit design logic to develop as shown in table~\ref{fig:ticalcs},  the most important of which is $V_0 = 1.25(1+\frac{R_2}{R_1})$.  To obtain a $5V$ output $R_2 = 3 R_1$ and resistors of $1.2k \Omega $ and $3.6k\Omega$ were chosen to reduce power consumption.  
+
+\begin{figure}[H]
+	\pic{0.8}{./figures/ticalcs}{The design parameters of the TI buck boost converters.}\label{fig:ticalcs}
+\end{figure}
+
+To complicate matters further, these resistors are not on the E12 series.  As a result, the $1.2k\Omega$ is replaced by a $3.3k\Omega$ and $1.8k\Omega$ resistors mounted in series and the $3.6k\Omega$ resistor is replaced by $10k\Omega$ and $5.6k\Omega$ resistors as shown in figure~\ref{fig:highlighted}.  Using this method the output voltage will be $5.1 \Omega$ which is sufficient for the operation of the board.
+
+\begin{figure}[H]
+	\pic{0.8}{./figures/highlighted}{A design schematic for the EPS.  Note the use of parallel resistors to obtain more precise voltages.}\label{fig:highlighted}
+\end{figure}
 
 \subsection{Battery Lifetime}
-Given that the system operates using 250 mA CHECKCHECKCHECK(depending on the precise mode of operation) it can run for 10 hours off this configuration.  As a standard balloon flight is expected to last for a maximum of 4 hours CHECKCHECKCHECK this is more than sufficient to power the CubeSat for the duration of the flight.
+Given that the system operates using 1000 mA during communications and 500mA otherwise (depending on the precise mode of operation) it can run for approximately 3.75 hours off this configuration assuming that it is transmitting 50 \% of the time.  As a standard balloon flight is expected to last for a maximum of 4 hours this is more than sufficient to power the CubeSat for the duration of the flight.
