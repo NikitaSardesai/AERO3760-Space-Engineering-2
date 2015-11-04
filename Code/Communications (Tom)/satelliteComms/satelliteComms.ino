@@ -110,6 +110,7 @@ void deleteTime(void){
     int i = 0;
     int stop = 0;
 
+
     
     while(dataFile.available()){
       nextByte = Serial1.read();
@@ -119,6 +120,27 @@ void deleteTime(void){
           storedTime[i] = Serial1.read();
         }
         //strcmp storedTime to delTime
+        for(i = 0; i<19;i++){
+          if (storedTime[i] >delTime[i]){
+            //we have just passed the point of delete and we want
+            // to move everything including this date to a new file before
+            // moving it back. Then we break from the loop
+            for(i = 0; i<19;i++){
+               newFile.write(storedTime[i]);
+            }
+            // should transfer all date
+            while (dataFile.available()>0){
+              newFile.write(dataFile.read());
+            }
+            newFile.close(); // reopen with read permission so it will start at the beginning
+            // need to delete the old file and copy the new one accross
+            // SD.remove gps.txt
+            SD.remove("gps.txt"):
+
+
+            break;
+          }
+        }
     }
     dataFile.close();
 }
