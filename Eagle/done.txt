@@ -1,0 +1,3 @@
+connectivity of bottom board test passed, nooutput works
+couldn't get it to work on different port - sd card failing
+sd card failing because it isn't soldered in
