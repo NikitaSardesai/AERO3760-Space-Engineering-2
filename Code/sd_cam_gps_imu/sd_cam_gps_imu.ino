@@ -55,10 +55,10 @@ const int chipSelectArducam = 10;
 
 //IMU HEADERS
 #include <Wire.h>
-//#include <Adafruit_Sensor.h>
-//#include <Adafruit_LSM303_U.h>
-//#include <Adafruit_L3GD20_U.h>
-//#include <Adafruit_9DOF.h>
+#include <Adafruit_Sensor.h>
+#include <Adafruit_LSM303_U.h>
+#include <Adafruit_L3GD20_U.h>
+#include <Adafruit_9DOF.h>
 
 //MAG CALC HEADERS
 
@@ -69,7 +69,7 @@ const int chipSelectArducam = 10;
 
 /* Assign a unique ID to the sensors */
 //Adafruit_L3GD20_Unified gyro = Adafruit_L3GD20_Unified(20);
-//Adafruit_LSM303_Accel_Unified accel = Adafruit_LSM303_Accel_Unified(30301);
+Adafruit_LSM303_Accel_Unified accel = Adafruit_LSM303_Accel_Unified(30301);
 //Adafruit_LSM303_Mag_Unified mag = Adafruit_LSM303_Mag_Unified(30302);
 
 //GLOBAL VARS
@@ -184,78 +184,78 @@ void arducamsetup(void){
   myCAM.set_bit(ARDUCHIP_GPIO,GPIO_PWDN_MASK);//enable low power
 }
 
-//void imusetup(void){
-//  Serial.println("Gyroscope Test"); 
-//  Serial.println("");
-//
-//  /* Enable auto-ranging */
-////  gyro.enableAutoRange(true);
-//
-//  /* Initialise the sensor */
-////  if(!gyro.begin())
-////  {
-////    /* There was a problem detecting the L3GD20 ... check your connections */
-////    Serial.println("Ooops, no L3GD20 detected ... error!");
-////    while(1); //hang code
-////  }
-//  if(!accel.begin())
+void imusetup(void){
+  Serial.println("Gyroscope Test"); 
+  Serial.println("");
+
+  /* Enable auto-ranging */
+//  gyro.enableAutoRange(true);
+
+  /* Initialise the sensor */
+//  if(!gyro.begin())
+//  {
+//    /* There was a problem detecting the L3GD20 ... check your connections */
+//    Serial.println("Ooops, no L3GD20 detected ... error!");
+//    while(1); //hang code
+//  }
+  if(!accel.begin())
+  {
+    /* There was a problem detecting the LSM303 ... check your connections */
+    Serial.println(F("Ooops, no LSM303 detected ... Check your wiring!"));
+    while(1);
+  }
+//  if(!mag.begin())
 //  {
 //    /* There was a problem detecting the LSM303 ... check your connections */
-//    Serial.println(F("Ooops, no LSM303 detected ... Check your wiring!"));
+//    Serial.println("Ooops, no LSM303 detected ... Check your wiring!");
 //    while(1);
 //  }
-////  if(!mag.begin())
-////  {
-////    /* There was a problem detecting the LSM303 ... check your connections */
-////    Serial.println("Ooops, no LSM303 detected ... Check your wiring!");
-////    while(1);
-////  }
-//}
+}
 
-//void imulog(void){
-//  /* Get a new sensor event */
-////  sensors_event_t gyro_event; 
-//  sensors_event_t accel_event;
-////  sensors_event_t mag_event;
-//
-////  gyro.getEvent(&gyro_event);
-//  accel.getEvent(&accel_event);
-////  mag.getEvent(&mag_event);
-//
-//  time_t t = now();
-//  // append to the string
-//  dataString = String(day(t));
-//  dataString += ",";
-//  dataString += String(hour(t));
-//  dataString += ",";
-//  dataString += String(minute(t));
-//  dataString += ",";
-//  dataString += String(second(t));
-//  dataString += ",";
-//  dataString += String(accel_event.acceleration.x);
-//  dataString += ",";
-//  dataString += String(accel_event.acceleration.y);
-//  dataString += ",";
-//  dataString += String(accel_event.acceleration.z);
-//  dataString += "\n"; //newline
-//
-//  // open the file. note that only one file can be open at a time,
-//  // so you have to close this one before opening another.
-//  File dataFile = SD.open("accel.txt", FILE_WRITE);
-//
-//  // if the file is available, write to it:
-//  if (dataFile) {
-//    dataFile.println(dataString);
-//    dataFile.close();
-//    // print to the serial port too:
-//    Serial.println(dataString);
-//  }  
-//  // if the file isn't open, pop up an error:
-//  else {
-//    Serial.println("error opening datalog.txt");
-//  }
-//
-//}
+void imulog(void){
+  /* Get a new sensor event */
+//  sensors_event_t gyro_event; 
+  sensors_event_t accel_event;
+//  sensors_event_t mag_event;
+
+//  gyro.getEvent(&gyro_event);
+  accel.getEvent(&accel_event);
+//  mag.getEvent(&mag_event);
+
+  time_t t = now();
+  // append to the string
+  dataString = String(day(t));
+  dataString += ",";
+  dataString += String(hour(t));
+  dataString += ",";
+  dataString += String(minute(t));
+  dataString += ",";
+  dataString += String(second(t));
+  dataString += ",";
+  dataString += String(accel_event.acceleration.x);
+  dataString += ",";
+  dataString += String(accel_event.acceleration.y);
+  dataString += ",";
+  dataString += String(accel_event.acceleration.z);
+  dataString += "\n"; //newline
+
+  // open the file. note that only one file can be open at a time,
+  // so you have to close this one before opening another.
+  File dataFile = SD.open("accel.txt", FILE_WRITE);
+
+  // if the file is available, write to it:
+  if (dataFile) {
+    dataFile.println(dataString);
+    dataFile.close();
+    // print to the serial port too:
+    Serial.println(dataString);
+  }  
+  // if the file isn't open, pop up an error:
+  else {
+    Serial.println("error opening datalog.txt");
+  }
+
+}
 
 void capture(void){
   uint8_t temp,temp_last;

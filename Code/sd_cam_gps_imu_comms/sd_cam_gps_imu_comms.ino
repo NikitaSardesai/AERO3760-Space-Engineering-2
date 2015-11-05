@@ -30,6 +30,11 @@
  *on Serial3 
  *TX - pin
  *RX - pin
+ *
+ COMMS
+ *on Serial1 /CHANGING IT TO THIS!!@!@!
+ *TX - pin
+ *RX - pin
  */
 
 #include <SD.h>
@@ -55,10 +60,10 @@ const int chipSelectArducam = 10;
 
 //IMU HEADERS
 #include <Wire.h>
-//#include <Adafruit_Sensor.h>
-//#include <Adafruit_LSM303_U.h>
-//#include <Adafruit_L3GD20_U.h>
-//#include <Adafruit_9DOF.h>
+#include <Adafruit_Sensor.h>
+#include <Adafruit_LSM303_U.h>
+#include <Adafruit_L3GD20_U.h>
+#include <Adafruit_9DOF.h>
 
 //MAG CALC HEADERS
 
@@ -69,13 +74,25 @@ const int chipSelectArducam = 10;
 
 /* Assign a unique ID to the sensors */
 //Adafruit_L3GD20_Unified gyro = Adafruit_L3GD20_Unified(20);
-//Adafruit_LSM303_Accel_Unified accel = Adafruit_LSM303_Accel_Unified(30301);
+Adafruit_LSM303_Accel_Unified accel = Adafruit_LSM303_Accel_Unified(30301);
 //Adafruit_LSM303_Mag_Unified mag = Adafruit_LSM303_Mag_Unified(30302);
 
 //GLOBAL VARS
 // make a string for assembling the data to log:
 //can write to this string from any function (if for example we need to use it to log GPS data)
 String dataString = "";
+unsigned long sd_pos_gps = 0;
+
+//COMM GLOBALS
+#define TRUE 1
+#define FALSE 0
+
+unsigned char byteReceived = 0x93;
+unsigned char ID = 2;
+char isItMySat(char received);
+char que;
+
+boolean TRANSMISSION = 0; //boolean of whether we're transmitting or not
 
 ArduCAM myCAM(OV2640,chipSelectArducam);
 
@@ -97,8 +114,21 @@ void setup()
   sdcardsetup();
   arducamsetup();
   gpssetup();
+  commssetup();
+  imusetup();
+}
 
-  //  imusetup();
+void loop()
+{
+  delay(5000);
+  //log IMU data
+  imulog();
+  capture();
+  CheckGPS();
+  
+  //potentially print stuff
+  checkping();
+  printdata();
 }
 
 void gpssetup(void){
@@ -106,17 +136,6 @@ void gpssetup(void){
   Serial.begin(9600);
   Serial.write("starting gps...");
 }
-
-void loop()
-{
-  delay(2000);
-  //log IMU data
-  //  imulog();
-  delay(1000);
-  capture();
-  CheckGPS();
-}
-
 
 void sdcardsetup(void){
   Serial.print("Initializing SD card...");
@@ -132,6 +151,10 @@ void sdcardsetup(void){
     return;
   }
   Serial.println("card initialized.");
+}
+
+void commssetup(void){
+  Serial1.begin(9600);
 }
 
 void arducamsetup(void){
@@ -184,78 +207,78 @@ void arducamsetup(void){
   myCAM.set_bit(ARDUCHIP_GPIO,GPIO_PWDN_MASK);//enable low power
 }
 
-//void imusetup(void){
-//  Serial.println("Gyroscope Test"); 
-//  Serial.println("");
-//
-//  /* Enable auto-ranging */
-////  gyro.enableAutoRange(true);
-//
-//  /* Initialise the sensor */
-////  if(!gyro.begin())
-////  {
-////    /* There was a problem detecting the L3GD20 ... check your connections */
-////    Serial.println("Ooops, no L3GD20 detected ... error!");
-////    while(1); //hang code
-////  }
-//  if(!accel.begin())
+void imusetup(void){
+  Serial.println("Gyroscope Test"); 
+  Serial.println("");
+
+  /* Enable auto-ranging */
+//  gyro.enableAutoRange(true);
+
+  /* Initialise the sensor */
+//  if(!gyro.begin())
+//  {
+//    /* There was a problem detecting the L3GD20 ... check your connections */
+//    Serial.println("Ooops, no L3GD20 detected ... error!");
+//    while(1); //hang code
+//  }
+  if(!accel.begin())
+  {
+    /* There was a problem detecting the LSM303 ... check your connections */
+    Serial.println(F("Ooops, no LSM303 detected ... Check your wiring!"));
+    while(1);
+  }
+//  if(!mag.begin())
 //  {
 //    /* There was a problem detecting the LSM303 ... check your connections */
-//    Serial.println(F("Ooops, no LSM303 detected ... Check your wiring!"));
+//    Serial.println("Ooops, no LSM303 detected ... Check your wiring!");
 //    while(1);
 //  }
-////  if(!mag.begin())
-////  {
-////    /* There was a problem detecting the LSM303 ... check your connections */
-////    Serial.println("Ooops, no LSM303 detected ... Check your wiring!");
-////    while(1);
-////  }
-//}
+}
 
-//void imulog(void){
-//  /* Get a new sensor event */
-////  sensors_event_t gyro_event; 
-//  sensors_event_t accel_event;
-////  sensors_event_t mag_event;
-//
-////  gyro.getEvent(&gyro_event);
-//  accel.getEvent(&accel_event);
-////  mag.getEvent(&mag_event);
-//
-//  time_t t = now();
-//  // append to the string
-//  dataString = String(day(t));
-//  dataString += ",";
-//  dataString += String(hour(t));
-//  dataString += ",";
-//  dataString += String(minute(t));
-//  dataString += ",";
-//  dataString += String(second(t));
-//  dataString += ",";
-//  dataString += String(accel_event.acceleration.x);
-//  dataString += ",";
-//  dataString += String(accel_event.acceleration.y);
-//  dataString += ",";
-//  dataString += String(accel_event.acceleration.z);
-//  dataString += "\n"; //newline
-//
-//  // open the file. note that only one file can be open at a time,
-//  // so you have to close this one before opening another.
-//  File dataFile = SD.open("accel.txt", FILE_WRITE);
-//
-//  // if the file is available, write to it:
-//  if (dataFile) {
-//    dataFile.println(dataString);
-//    dataFile.close();
-//    // print to the serial port too:
-//    Serial.println(dataString);
-//  }  
-//  // if the file isn't open, pop up an error:
-//  else {
-//    Serial.println("error opening datalog.txt");
-//  }
-//
-//}
+void imulog(void){
+  /* Get a new sensor event */
+//  sensors_event_t gyro_event; 
+  sensors_event_t accel_event;
+//  sensors_event_t mag_event;
+
+//  gyro.getEvent(&gyro_event);
+  accel.getEvent(&accel_event);
+//  mag.getEvent(&mag_event);
+
+  time_t t = now();
+  // append to the string
+  dataString = String(day(t));
+  dataString += ",";
+  dataString += String(hour(t));
+  dataString += ",";
+  dataString += String(minute(t));
+  dataString += ",";
+  dataString += String(second(t));
+  dataString += ",";
+  dataString += String(accel_event.acceleration.x);
+  dataString += ",";
+  dataString += String(accel_event.acceleration.y);
+  dataString += ",";
+  dataString += String(accel_event.acceleration.z);
+  dataString += "\n"; //newline
+
+  // open the file. note that only one file can be open at a time,
+  // so you have to close this one before opening another.
+  File dataFile = SD.open("accel.txt", FILE_WRITE);
+
+  // if the file is available, write to it:
+  if (dataFile) {
+    dataFile.println(dataString);
+    dataFile.close();
+    // print to the serial port too:
+    Serial.println(dataString);
+  }  
+  // if the file isn't open, pop up an error:
+  else {
+    Serial.println("error opening datalog.txt");
+  }
+
+}
 
 void capture(void){
   uint8_t temp,temp_last;
@@ -389,6 +412,7 @@ void ProcessGPSLine()
 {
   if ((GPSBuffer[1] == 'G') && (GPSBuffer[2] == 'N') && (GPSBuffer[3] == 'G') && (GPSBuffer[4] == 'G') && (GPSBuffer[5] == 'A'))
   {
+    //debugging
     Serial.println("GNGGA Detected!");
     ProcessGNGGACommand();
     Serial.println("Timestamp :");
@@ -401,7 +425,47 @@ void ProcessGPSLine()
     Serial.println(GPS_Altitude);
     Serial.print("Satellites :");
     Serial.println(GPS_Satellites);
+    
+    //write to sd card
+    dataString = "Timestamp: ";
+    dataString += String(gpstime);
+    dataString += "Lat:";
+    dataString += String(latitude);
+    dataString += "Long:";
+    dataString += String(longitude);
+    dataString += "Altitude:";
+    dataString += String(GPS_Altitude);
+    dataString += "Satellites :";
+    dataString += String(GPS_Satellites);
+    dataString += "\n"; //newline
+    
+    // open the file. note that only one file can be open at a time,
+    // so you have to close this one before opening another.
+    File dataFile = SD.open("gps.txt", FILE_WRITE);
 
+    // if the file is available, write to it:
+    if (dataFile) {
+      sd_pos_gps = dataFile.position(); //save position of the start of the file
+      dataFile.println(dataString);
+      dataFile.close();
+      // print to the serial port too:
+      Serial.println(dataString);
+    }  
+    // if the file isn't open, pop up an error:
+    else {
+      Serial.println("error opening datalog.txt");
+    }
+    
+    Serial.println("Timestamp :");
+    Serial.println(gpstime);
+    Serial.print("Latitude :");
+    Serial.println(latitude);
+    Serial.print("Longitude :");
+    Serial.println(longitude);
+    Serial.print("Altitude :");
+    Serial.println(GPS_Altitude);
+    Serial.print("Satellites :");
+    Serial.println(GPS_Satellites);
     
   }
   else
@@ -495,4 +559,63 @@ void ProcessGNGGACommand() {
     latitude = latstamp;
     longitude = longstamp;
   }
+}
+
+// COMMS SECTION
+
+void checkping(void){
+  //check serial
+  if (Serial1.available() > 0){
+    byteReceived = Serial1.read();
+    Serial.println(byteReceived); //send byte to computer for debugging
+  }
+  
+  //check if it is calling our sat
+  que = isItMySat(byteReceived);
+  //if it is reply
+  if (que){
+    char i;
+    for (i=0;i<2;i++){ //print out byteReceived three times as handshake
+      Serial1.println(byteReceived);
+      Serial.println(byteReceived);
+    }
+    TRANSMISSION = true;
+  }
+}
+
+
+char isItMySat(char received)
+{
+  char hello = (received >> 6) & 0x03;
+  if (hello == ID)
+  {
+    //Serial.println("h");
+    return TRUE;
+  }
+  else
+  {
+    //Serial.println("f=");
+    return FALSE;
+  }
+}
+
+void printdata(void){
+
+  //print gps data
+  
+  File dataFile = SD.open("gps.txt");
+
+  // if the file is available, write to it:
+  if (dataFile) {
+    dataFile.seek(sd_pos_gps); // go to start of last written location
+    while (dataFile.available()) {
+      Serial1.write(dataFile.read());
+      Serial.write(dataFile.read());
+    }
+    dataFile.close();
+  }
+  // if the file isn't open, pop up an error:
+  else {
+    Serial.println("error opening gpslog.txt");
+  } 
 }
