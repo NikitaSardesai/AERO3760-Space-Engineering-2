@@ -13,37 +13,47 @@ int TRANSMISSION = 0;
 
 void setup() {
   // put your setup code here, to run once:
+  Serial1.begin(9600);
+  Serial.begin(9600);
 
 }
 
 void loop() {
   if(Serial1.available()>0){
+    Serial.println("Message in buffer");
     nextByte = Serial1.read();
-    if(nextByte == '*'){
+    if(nextByte == '#'){
+      Serial.println("First Byte #");
+      Serial1.println(nextByte);
+      while (Serial1.available()==0){}
       nextByte = Serial1.read();
-      if(nextByte == 'a'){
+      Serial.println(nextByte);
+      Serial1.println(nextByte);
+      if(nextByte == 'c'){
+        Serial.println("Second Byte c");
+        while (Serial1.available()==0){}
         nextByte = Serial1.read();
-        switch(nextByte){
-          case '+':
-            // when the character is + it turns transmission on
-            TRANSMISSION = true;
-            break;
-          case '&':
-            // when the character is - it turns transmission off
-            TRANSMISSION = false;
-            break;
-          case '-':
-            // this is the case to delete all data before the time set
+        
+        if(nextByte == '+'){
+          TRANSMISSION = true;
+          Serial.println("Transmission == On");
+        }
+        else if (nextByte == '&'){
+          TRANSMISSION = false;
+        }
+        else if (nextByte == '-'){
             for(int i = 0; i<19;i++){
               delTime[i] = Serial1.read();
             }
             deleteFlag = 1;
-            break;
-          default:
-          break;
-        } 
+        }
       }
     }
+  }
+  if(TRANSMISSION == true){
+    //Serial1.write("**");
+    //Serial.write("**");
+    TRANSMISSION == false;
   }
 }
 
@@ -98,6 +108,8 @@ Everything that is stored should first have the date in the format:
   dataString += String(second(t));
 */
 
+
+/*
 // have to detect a new line and start storing information from there for 19 bytes
 // after the new date is stored into a variable then compare the strings
 // if stored one is older then keep going
@@ -144,4 +156,4 @@ void deleteTime(void){
     }
     dataFile.close();
 }
-
+*/

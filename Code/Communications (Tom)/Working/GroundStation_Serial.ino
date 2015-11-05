@@ -1,5 +1,5 @@
-#include <SD.h>
-#include <SPI.h>
+//#include <SD.h>
+//#include <SPI.h>
 
 const int chipSelectSD = 11;
 char nextByte;
@@ -8,8 +8,8 @@ char nextByte;
 
 void setup() {
   // setup serial to 9600
-  Serial1.begin(9600); // this should probably be changed to 57600 as this is what comms is set to
-  Serial.begin(9600); // this should probably be changed to 57600 as this is what comms is set to
+  Serial1.begin(57600); // this should probably be changed to 57600 as this is what comms is set to
+  Serial.begin(57600); // this should probably be changed to 57600 as this is what comms is set to
   // set up the SD card to store the data
 }
 
@@ -17,18 +17,18 @@ void loop() {
     //File dataFile = SD.open("snapSat.txt", FILE_WRITE);
 
 
-    Serial1.write("#c+");
+    Serial1.write("#e+");
+    Serial.println("Sent to satellite: #e+");
+    Serial.println("Received from satellite:");
+    
     while(1){
       if(Serial1.available()>0){
         // Serial.write("Serial is available");
         nextByte = Serial1.read();
-
         if(nextByte == '*'){
-          Serial.print(nextByte);
+          while(Serial1.available()==0){}
           nextByte = Serial1.read();
-          Serial.println("Got first star");
           if(nextByte == '*'){ // transmission is complete
-            Serial.print(nextByte);
             Serial.println("");
             Serial.println("End of transmission");
             //dataFile.println("");
