@@ -13,7 +13,7 @@ int TRANSMISSION = 0;
 
 void setup() {
   // put your setup code here, to run once:
-  Serial1.begin(9600);
+  Serial1.begin(57600);
   Serial.begin(9600);
 
 }
@@ -29,7 +29,7 @@ void loop() {
       nextByte = Serial1.read();
       Serial.println(nextByte);
       Serial1.println(nextByte);
-      if(nextByte == 'c'){
+      if(nextByte == 'e'){
         Serial.println("Second Byte c");
         while (Serial1.available()==0){}
         nextByte = Serial1.read();
