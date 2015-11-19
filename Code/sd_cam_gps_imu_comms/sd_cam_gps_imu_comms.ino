@@ -83,16 +83,16 @@ ArduCAM myCAM(OV2640, chipSelectArducam);
 
 
 //GPS HEADERS
-byte GPSBuffer[82];
-byte GPSIndex = 0;
-int deleteFlag = 0;
+uint8_t GPSBuffer[82];
+uint8_t GPSIndex = 0;
+int16_t deleteFlag = 0;
 char nextByte;
 int transmission = 0;
-unsigned int GPS_Satellites = 0;
-unsigned int GPS_Altitude = 0;
-unsigned int gpstime = 0;
-unsigned int latitude = 0;
-unsigned int longitude = 0;
+uint16_t GPS_Satellites = 0;
+uint16_t GPS_Altitude = 0;
+uint16_t gpstime = 0;
+uint16_t latitude = 0;
+uint16_t longitude = 0;
 
 void setup()
 {
@@ -161,6 +161,12 @@ void transmit(void){
 
         
     dataFile = SD.open("gyro.txt", FILE_READ);
+    while(dataFile.available()){
+      Serial1.write(dataFile.read());
+    }
+    dataFile.close();
+
+    dataFile = SD.open("gps.txt", FILE_READ);
     while(dataFile.available()){
       Serial1.write(dataFile.read());
     }
@@ -370,7 +376,7 @@ void imulog(void) {
   dataString += " ";
   dataString += "Z: ";
   dataString += String((float)mag.m.z);
-  dataString += " fuckknows";
+  dataString += " gauss";
   dataString += "\n"; //newline
 
   // open the file. note that only one file can be open at a time,
@@ -535,7 +541,7 @@ void capture(void) {
 //GPS CODE HERE
 void CheckGPS()
 {
-  int inByte;
+  uint8_t inByte;
   while (Serial3.available() > 0)
   {
     inByte = Serial3.read();
@@ -596,11 +602,11 @@ void ProcessGPSLine()
 
 void ProcessGNGGACommand() {
 
-  int i, j, k, IntegerPart;
-  unsigned int Altitude;
-  unsigned int timestamp;
-  unsigned int latstamp;
-  unsigned int longstamp;
+  int16_t i, j, k, IntegerPart;
+  uint16_t Altitude;
+  uint16_t timestamp;
+  uint16_t latstamp;
+  uint16_t longstamp;
 
   // $GNGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*47
   //                                               =====  <-- altitude in field 8
