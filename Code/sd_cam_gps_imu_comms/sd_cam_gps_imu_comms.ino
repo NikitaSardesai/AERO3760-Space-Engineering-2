@@ -245,16 +245,16 @@ void imulog(void){
   accel.getEvent(&accel_event);
 //  mag.getEvent(&mag_event);
 
-  time_t t = now();
+  //time_t t = now();
   // append to the string
-  dataString = String(day(t));
-  dataString += ",";
-  dataString += String(hour(t));
-  dataString += ",";
-  dataString += String(minute(t));
-  dataString += ",";
-  dataString += String(second(t));
-  dataString += ",";
+//  dataString = String(day(t));
+//  dataString += ",";
+//  dataString += String(hour(t));
+//  dataString += ",";
+//  dataString += String(minute(t));
+//  dataString += ",";
+//  dataString += String(second(t));
+//  dataString += ",";
   dataString += String(accel_event.acceleration.x);
   dataString += ",";
   dataString += String(accel_event.acceleration.y);
